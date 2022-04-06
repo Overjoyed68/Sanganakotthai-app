@@ -1,0 +1,45 @@
+.national-view {
+  padding: var(--bar-padding);
+
+  &--header {
+    font-size: 3.2rem;
+  }
+
+  &--text {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  &--number {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  &--candidate-list {
+    list-style: none;
+
+    &-item {
+      font-size: 1.6rem;
+      margin: 0.5rem 0;
+    }
+  }
+
+  @include tablet {
+    padding-bottom: 4rem;
+
+    &--header {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    &--content {
+      max-height: 18rem;
+      overflow: auto;
+      transition: height .5s ease-out;
+
+      .show-info & {
+        height: calc(100vh - 25rem);
+        max-height: initial;
+      }
+    }
+  }
+}

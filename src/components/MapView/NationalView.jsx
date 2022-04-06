@@ -1,0 +1,287 @@
+import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import _ from 'lodash';
+import styled from 'styled-components';
+
+import MapContext from '../../map/context';
+import Overview from './Overview';
+import PartyList from './PartyList';
+import ElectionYear from './ElectionYear';
+import novoteImage from '../../images/NoVote.svg';
+import { device } from '../size';
+import Scope from './Scope';
+import partyColor from '../../map/color';
+
+
+const NationalLeft = () => {
+    return <Scope />
+    // return <ElectionYear />;
+};
+
+const ToggleButton = styled.a`
+  display: none;
+
+  @media ${device.tablet} {
+    display: block;
+    float: right;
+    line-height: 1;
+    transform: rotate(180deg);
+    transition: transform .4s ease-out;
+    margin-top: 0.3rem;
+
+    i {
+      border: none;
+    }
+
+    .show-info & {
+      transform: rotate(0);
+    }
+  }
+`;
+
+const Loader = styled.div`
+  width: 100%;
+  height: 300px;
+  textAlign: center;
+
+  h1 {
+    font-size: 3rem;
+    line-height: 30rem;
+    text-align: center;
+  }
+
+  @media ${device.tablet} {
+    h1 {
+      line-height: 10rem;
+    }
+  }
+`;
+
+const NationalRight = ({ toggleShowDetail, partyChanged }) => {
+    const { setProvince, CountryTopoJson, electionYear } = useContext(MapContext);
+    const [nationalProps, setNationalProps] = useState([]);
+    const [selectedParty, setSelectedParty] = useState('')
+    const [isLoading, setLoading] = useState(false);
+    const isNoVote = electionYear === 'election-2557';
+
+    useEffect(() => {
+        setProvince('ประเทศไทย');
+    }, []);
+    
+    useEffect(() => {
+        if (CountryTopoJson.length === 0) return;
+        const nationalProps = CountryTopoJson.objects[electionYear].geometries.map(
+            geo => geo.properties
+        );
+        setNationalProps(nationalProps);
+    }, [CountryTopoJson, electionYear]);
+
+    const numZone = nationalProps.length;
+    const numCandidate = nationalProps.reduce((acc, cur) => {
+        return acc + cur.quota;
+    }, 0);
+    let byParty = {};
+    nationalProps.map(cur => {
+        if (!cur.result) {
+            byParty['noresult'] = 'No vote';
+            return;
+        }
+        cur.result
+            .sort((a, b) => b.score - a.score)
+            .slice(0, cur.quota)
+            .map(person => {
+                if (!(person.party in byParty)) {
+                    byParty[person.party] = [person];
+                } else {
+                    byParty[person.party] = [...byParty[person.party], person];
+                }
+            });
+    });
+
+    let byPartySorted = [];
+    for (let [party, winnerResult] of Object.entries(byParty)) {
+        byPartySorted.push({ party, candidate: winnerResult.length });
+    }
+    byPartySorted.sort((a, b) => b.candidate - a.candidate);
+
+    return (
+        <div>
+            {isLoading ? (
+                <Loader>
+                    <h1>
+                        กำลังโหลดข้อมูล
+                    </h1>
+                </Loader>
+            ) : (
+                <div className="national-view">
+                    {/* <h1 className="national-view--header">
+                        {numZone} เขต {numCandidate} คน
+                        <ToggleButton onClick={() => toggleShowDetail()}>
+                            <i className="icon--chevron icon--chevron"></i>
+                        </ToggleButton>
+                    </h1> */}
+                    {isNoVote ? (
+                        <NoVoteDisplay view={'nationView'} />
+                    ) : (
+                        <div className="national-view--content">
+                            <ul className="party-list--list">
+                                {byPartySorted.map(({ party, candidate }) => (
+                                    <li key={party} className="party-list--list-item">
+                                        <span
+                                            className="party-list--party-box"
+                                            style={{
+                                                backgroundColor: partyColor(electionYear)(party)
+                                            }}
+                                        ></span>
+                                        <a onClick={() => partyChanged(party)}>พรรค{party}</a>
+                                        {' '}
+                                        <span className="party-list--count">
+                                            {' '}
+                                            <span style={{ fontFamily: 'Noto Sans', fontWeight: 500 }}>
+                                                {candidate}
+                                            </span>{' '}
+                                            คน
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+
+                            {/* <div className="overview">
+                                <h2 className="overview--header">Overview</h2>
+                                <div className="waffle">
+                                    {byPartySorted.map(d => {
+                                        const [party, count] = Object.values(d);
+                                        return [...Array(count).keys()].map(i => (
+                                            <div
+                                                key={party + i}
+                                                className="waffle--waffle"
+                                                style={{
+                                                    backgroundColor: partyColor(electionYear)(party),
+                                                    width: 8,
+                                                    height: 8
+                                                }}
+                                            >
+                                                <span
+                                                    className="waffle--waffle__tooltiptext"
+                                                    style={{ zIndex: '5' }}
+                                                >
+                                                    <span
+                                                        className="waffle--waffle__tooltipcolor"
+                                                        style={{
+                                                            display: 'inline-block',
+                                                            backgroundColor: partyColor(electionYear)(party),
+                                                            width: '1rem',
+                                                            height: '1rem',
+                                                            marginRight: '.5rem'
+                                                        }}
+                                                    ></span>
+                                                    {party}
+                                                </span>
+                                            </div>
+                                        ));
+                                    })}
+                                </div>
+                            </div> */}
+                        </div>
+                    )}
+                </div>
+            )}
+        </div>
+    );
+};
+const Container = styled.div`
+  width: 258px;
+  margin: 2rem auto;
+  padding-top: 3rem;
+  ${props =>
+        props.compareView &&
+        `
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  `}
+`;
+const WarnText = styled.h1`
+  color: #da3731;
+  font-family: 'The MATTER';
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 36px;
+  text-align: center;
+  ${props =>
+        props.compareView &&
+        `
+    color: #da3731;
+    font-family: "The MATTER";
+    font-size: 1.4rem;
+    font-weight: bold;
+    line-height: 18px;
+    text-align: center;
+  `}
+`;
+const ExplainText = styled.p`
+  color: #000000;
+  font-family: 'Noto Sans Thai';
+  font-size: 1.6rem;
+  font-weight: normal;
+  text-align: left;
+  ${props =>
+        props.compareView &&
+        `
+    color: #000000;
+    font-family: "Noto Sans Thai";
+    font-size: 1.1rem;
+    font-weight: normal;
+    letter-spacing: 0;
+    margin-top: 0.5rem;
+  `}
+  a {
+    color: inherit;
+  }
+`;
+
+const NoVoteDisplay = ({ view }) => {
+    const width = view === 'nationView' ? 257 : 65;
+    const height = view === 'nationView' ? 159 : 40;
+    return (
+        <div>
+            {view === 'nationView' ? (
+                <Container>
+                    <img src={novoteImage} width={width} height={height} />
+                    <WarnText>การเลือกตั้งเป็นโมฆะ</WarnText>
+                    <ExplainText>
+                        เนื่องจากเกิดการชุมนุมปิดคูหาเลือกตั้ง
+                        ทำให้ไม่สามารถเลือกตั้งพร้อมกันได้ทั่วประเทศในวันเดียวกัน
+                        ตามที่กำหนดไว้ในรัฐธรรมนูญ
+                    </ExplainText>
+                </Container>
+            ) : (
+                <Container compareView>
+                    <img src={novoteImage} width={width} height={height} />
+                    <WarnText compareView>การเลือกตั้งเป็นโมฆะ</WarnText>
+                    <ExplainText compareView>
+                        เนื่องจากเกิดการชุมนุมปิดคูหาเลือกตั้ง
+                        ทำให้ไม่สามารถเลือกตั้งพร้อมกันได้ทั่วประเทศในวันเดียวกัน
+                        ตามที่กำหนดไว้ในรัฐธรรมนูญ
+                    </ExplainText>
+                </Container>
+            )}
+        </div>
+    );
+};
+
+const NoBeungKanProvince = ({ year }) => {
+    return (
+        <Container compareView style={{ marginTop: '2rem', marginBottom: '2rem' }}>
+            <WarnText compareView>ไม่มีข้อมูล</WarnText>
+            <ExplainText compareView>
+                จังหวัดบึงกาฬแยกออกจาก
+                <Link to={`/${year}/compare/หนองคาย`}>จังหวัดหนองคาย</Link>
+                เมื่อปี 2554
+            </ExplainText>
+        </Container>
+    );
+};
+
+export { NationalLeft, NationalRight, NoVoteDisplay, NoBeungKanProvince };

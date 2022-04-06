@@ -1,0 +1,69 @@
+.bar {
+  flex: 0 0 32rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-flow: column;
+
+  & > * {
+    width: 100%;
+  }
+
+  &--lower {
+    margin-top: 1.5rem;
+    // border: 2px solid var(--color-black);
+    border-radius: calc(var(--border-radius) - 0.5rem);
+    background-color: var(--color-white);
+    color: var(--color-black);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
+  }
+
+  &--green {
+    background-color: #00AA4E;
+  }
+
+
+  &__left {
+    padding-top: 2rem;
+    padding-left: 2rem;
+  }
+
+  &__right {
+    padding-top: 2rem;
+    padding-right: 2rem;
+    // margin-left: auto;
+  }
+
+  @include tablet {
+    &__left {
+      flex-grow: 1;
+      padding-top: 0;
+      padding-left: 0;
+    }
+    &--lower__left {
+      display: none;
+    }
+
+    &__right {
+      display: flex;
+      padding-top: 0;
+      padding-right: 0;
+      position: fixed;
+      left: 1rem;
+      right: 1rem;
+      top: calc(100vh - 32rem);
+      transition: top 0.5s ease-out;
+
+      &.show-info {
+        top: 12rem;
+      }
+
+    }
+  }
+}
+
+.chance-label {
+  font-size: 3rem;
+  color: red;
+}

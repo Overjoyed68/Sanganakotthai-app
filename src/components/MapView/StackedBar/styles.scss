@@ -1,0 +1,53 @@
+.stacked-bar {
+    display: flex;
+    height: 0.5rem;
+    width: 100%;
+    align-items: center;
+    list-style-type: none;
+    margin-top: 0.5rem;
+  
+    &--bar {
+      height: 100%;
+  
+      position: relative;
+  
+      &:not(:last-child) {
+        margin-right: 1px;
+      }
+  
+      &:hover &__tooltiptext {
+        visibility: visible;
+      }
+  
+      &__tooltiptext {
+        font-size: 1rem;
+        position: absolute;
+        bottom: 0.75rem;
+        width: 15rem;
+        background-color: var(--color-white);
+        transform: translate(-50%, -50%);
+        padding: 0.5rem 1rem;
+        box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.5);
+        left: 50%;
+  
+        &::before {
+          content: ' ';
+          position: absolute;
+          top: 100%; /* At the bottom of the tooltip */
+          left: 50%;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: var(--color-white) transparent transparent transparent;
+        }
+  
+        visibility: hidden;
+      }
+    }
+  
+    &--winner-percentage {
+      font-size: 1rem;
+      margin-left: 1rem;
+    }
+  }
+  

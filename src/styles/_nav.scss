@@ -1,0 +1,105 @@
+.nav {
+  z-index: 9999;
+  position: sticky;
+  top: 0;
+  left: 0;
+  min-width: 100rem;
+  // width: 100%;
+  height: 6rem;
+  padding: 0 3rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 2.4rem;
+
+  background-color: var(--color-nav);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+  color: var(--color-white);
+
+  &--logo {
+    color: var(--color-white);
+    text-decoration: none;
+  }
+  &--logo-image {
+    display: block;
+    height: 2.9rem;
+  }
+
+  .nav--header {
+    font-size: 2.4rem;
+  }
+
+  .nav--header__link {
+    text-decoration: none;
+    color: var(--color-white);
+  }
+
+  .nav--about-us {
+    white-space: nowrap;
+  }
+  .nav--about-us__link {
+    text-decoration: none;
+    color: var(--color-white);
+  }
+
+  @include tablet {
+    width: 100%;
+    min-width: initial;
+    font-size: 1.6rem;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    grid-template-rows: 3rem 3rem;
+    grid-template-areas:
+      "logo title"
+      "menu title";
+    column-gap: 2rem;
+    row-gap: 0rem;
+    justify-items: stretch;
+    align-items: center;
+    justify-content: space-between;
+    align-content: stretch;
+
+    .nav--logo {
+      grid-area: logo;
+      align-self: end;
+    }
+    .nav--logo-image {
+      height: 1.6rem;
+    }
+
+    .nav--header__link {
+      grid-area: title;
+    }
+
+    .nav--header {
+      font-size: 1.6rem;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .nav--about-us__link {
+      grid-area: menu;
+      align-self: start;
+      font-size: 1.4rem;
+      line-height: 1.6;
+    }
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    grid-template-rows: 5rem;
+    grid-template-areas:
+      "logo title";
+
+    .nav--header {
+      text-align: left;
+    }
+
+    .nav--logo-image {
+      height: 4rem;
+    }
+  }
+}
