@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import _ from 'lodash';
+// import _ from 'lodash';
 import styled from 'styled-components';
 
 import MapContext from '../../map/context';
-import Overview from './Overview';
-import PartyList from './PartyList';
-import ElectionYear from './ElectionYear';
+// import Overview from './Overview';
+// import PartyList from './PartyList';
+// import ElectionYear from './ElectionYear';
 import novoteImage from '../../images/NoVote.svg';
 import { device } from '../size';
 import Scope from './Scope';
@@ -18,26 +18,26 @@ const NationalLeft = () => {
     // return <ElectionYear />;
 };
 
-const ToggleButton = styled.a`
-  display: none;
+// const ToggleButton = styled.a`
+//   display: none;
 
-  @media ${device.tablet} {
-    display: block;
-    float: right;
-    line-height: 1;
-    transform: rotate(180deg);
-    transition: transform .4s ease-out;
-    margin-top: 0.3rem;
+//   @media ${device.tablet} {
+//     display: block;
+//     float: right;
+//     line-height: 1;
+//     transform: rotate(180deg);
+//     transition: transform .4s ease-out;
+//     margin-top: 0.3rem;
 
-    i {
-      border: none;
-    }
+//     i {
+//       border: none;
+//     }
 
-    .show-info & {
-      transform: rotate(0);
-    }
-  }
-`;
+//     .show-info & {
+//       transform: rotate(0);
+//     }
+//   }
+// `;
 
 const Loader = styled.div`
   width: 100%;
@@ -60,7 +60,6 @@ const Loader = styled.div`
 const NationalRight = ({ toggleShowDetail, partyChanged }) => {
     const { setProvince, CountryTopoJson, electionYear } = useContext(MapContext);
     const [nationalProps, setNationalProps] = useState([]);
-    const [selectedParty, setSelectedParty] = useState('')
     const [isLoading, setLoading] = useState(false);
     const isNoVote = electionYear === 'election-2557';
 

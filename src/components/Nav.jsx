@@ -8,7 +8,7 @@ const Nav = () => {
     return (
         <nav className="nav">
             <a href="https://sanganakotthai.com/" target="_blank" className="nav--logo nav--logo__elect">
-                <img src="/site_logo.png" className="nav--logo-image"></img>
+                <img src={process.env.PUBLIC_URL + `/site_logo.png`} className="nav--logo-image"></img >
             </a>
         </nav>
     );
