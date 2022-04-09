@@ -52,6 +52,8 @@ const DropdownZones = props => {
             setZone('เขต');
         } else {
             allZones = zoneList.filter(data => data.province_name === province);
+            setProvince(province);
+            // setZone(allZones[0].zone_name)
         }
         setDropdownZones(allZones);
     }, [props.province])
