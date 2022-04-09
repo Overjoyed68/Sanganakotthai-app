@@ -59,7 +59,6 @@ const DropdownZones = props => {
     return (
         <div className="dropdown--container" ref={ref}>
             <div
-                // className="dropdown--button-zone"
                 className={`dropdown--button-zone ${`${zone}` !==
                 'เขต' && 'dropdown--button-zone__active'}`}
                 onClick={() => setShowItems(prev => !prev)}>

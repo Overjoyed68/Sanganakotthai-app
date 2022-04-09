@@ -10,7 +10,11 @@ const Scope = props => {
     return (
         <div>
             <div className='year-choice--list'>
-                <div className='year-choice--list-item' onClick={() => { props.history.push(`/2562`); setProvince('ประเทศไทย'); }}>
+                {console.log(province, zone)}
+                <div
+                    className={`year-choice--list-item ${`${province}` ===
+                        'ประเทศไทย' && `${zone}` ==='เขต' && 'year-choice--list-item__active'}`}
+                    onClick={() => { props.history.push(`/2562`); setProvince('ประเทศไทย'); }}>
                     ประเทศไทย
                 </div>
 

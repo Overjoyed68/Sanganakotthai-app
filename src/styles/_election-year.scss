@@ -30,12 +30,13 @@
 
     &:hover {
       color: black;
-      background-color: var(--color-white);
+      // background-color: var(--color-white);
     }
 
     &__active {
-      color: black;
-      background-color: var(--color-white);
+      background-color: #00AA4E;
+      // color: black;
+      // background-color: var(--color-white);
     }
   }
 }
