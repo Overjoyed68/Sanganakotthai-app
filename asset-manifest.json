@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Sanganakotthai-app/static/css/main.22947ecb.css",
-    "main.js": "/Sanganakotthai-app/static/js/main.38691759.js",
+    "main.css": "/Sanganakotthai-app/static/css/main.5b5397e0.css",
+    "main.js": "/Sanganakotthai-app/static/js/main.94ccc132.js",
     "static/media/NotoSans-Medium.ttf": "/Sanganakotthai-app/static/media/NotoSans-Medium.d230ef0486164f923991.ttf",
     "static/media/thematter-bold.ttf": "/Sanganakotthai-app/static/media/thematter-bold.4fe39d59326f1898f6bf.ttf",
     "static/media/NotoSansThaiUI-Medium.ttf": "/Sanganakotthai-app/static/media/NotoSansThaiUI-Medium.83c1ffc767d16889114a.ttf",
@@ -10,11 +10,11 @@
     "static/media/NotoSansThaiUI-Bold.woff2": "/Sanganakotthai-app/static/media/NotoSansThaiUI-Bold.84309aeae2ae5b178409.woff2",
     "static/media/NotoSansThaiUI-Regular.woff2": "/Sanganakotthai-app/static/media/NotoSansThaiUI-Regular.0e849108e68db8d86efb.woff2",
     "index.html": "/Sanganakotthai-app/index.html",
-    "main.22947ecb.css.map": "/Sanganakotthai-app/static/css/main.22947ecb.css.map",
-    "main.38691759.js.map": "/Sanganakotthai-app/static/js/main.38691759.js.map"
+    "main.5b5397e0.css.map": "/Sanganakotthai-app/static/css/main.5b5397e0.css.map",
+    "main.94ccc132.js.map": "/Sanganakotthai-app/static/js/main.94ccc132.js.map"
   },
   "entrypoints": [
-    "static/css/main.22947ecb.css",
-    "static/js/main.38691759.js"
+    "static/css/main.5b5397e0.css",
+    "static/js/main.94ccc132.js"
   ]
 }
