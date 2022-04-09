@@ -12,6 +12,7 @@ function D3Map(
     push,
     initElectionYear,
     initProvince,
+    initZone,
     initScale,
     setTooltips,
     initScope
@@ -26,7 +27,8 @@ function D3Map(
         $border_province,
         $border_zone,
         electionYear = initElectionYear,
-        province = initProvince;
+        province = initProvince,
+        zone = initZone;
     const SCALE = initScale;
     let scope = initScope;
 
@@ -65,6 +67,7 @@ function D3Map(
         $zone.call(drawMap);
         labelJoin(false);
         setProvince(province);
+        setZone(zone);
     };
 
     const setScope = newScope => {
@@ -127,9 +130,61 @@ function D3Map(
         $label.call(addLabel, delay);
     }
 
+    const setZone = newZone => {
+        zone = newZone;
+        removeLabel();
+
+        $zone
+            .transition()
+            .delay(1000)
+            .attr('fill', fillSolid);
+
+        if (province !== 'ประเทศไทย' && zone !== 'เขต') {
+            const selection = {
+                type: 'FeatureCollection',
+                features: topojson
+                    .feature(geo, geo.objects[electionYear])
+                    .features.filter(
+                        ({ properties: { province_name, zone_name } }) => province_name === province && zone_name === zone
+                    )
+            };
+
+            const b = path.bounds(selection);
+            const zoomScale =
+                0.7 /
+                Math.max(
+                    (b[1][0] - b[0][0]) / viewport[4],
+                    (b[1][1] - b[0][1]) / viewport[5]
+                );
+            const lonCenter = (b[0][0] + b[1][0]) / 2;
+            const latCenter = (b[0][1] + b[1][1]) / 2;
+            const center = [lonCenter, latCenter];
+            const translate = [
+                zoomScale * -center[0] + viewport[2] - 180,
+                zoomScale * -center[1] + viewport[3]
+            ];
+
+            let transform = `translate(${translate[0]}, ${translate[1]}) scale(${zoomScale})`;
+
+            // Province zoom view
+            $vis
+                .transition()
+                .duration(1000)
+                .attr('transform', transform)
+                .on('end', () => {
+                    $zone.attr(
+                        'fill',
+                        fillFactory($defs, 'normal')(electionYear)(province)
+                    ); // post map-panning
+                    updatePatternTransform.call($vis.node(), 'zoom');
+                    labelJoin();
+                });
+        } 
+    }
+
     const setProvince = newProvince => {
         province = newProvince;
-        // labelJoin();
+        labelJoin();
         removeLabel();
 
         $zone
@@ -149,7 +204,7 @@ function D3Map(
 
             const b = path.bounds(selection);
             const zoomScale =
-                0.875 /
+                0.4 /
                 Math.max(
                     (b[1][0] - b[0][0]) / viewport[4],
                     (b[1][1] - b[0][1]) / viewport[5]
@@ -158,8 +213,8 @@ function D3Map(
             const latCenter = (b[0][1] + b[1][1]) / 2;
             const center = [lonCenter, latCenter];
             const translate = [
-                zoomScale * -center[0] + viewport[2],
-                zoomScale * -center[1] + viewport[3]
+                zoomScale * -center[0] + viewport[2] - 180,
+                zoomScale * -center[1] + viewport[3] - 100
             ];
 
             let transform = `translate(${translate[0]}, ${translate[1]}) scale(${zoomScale})`;
@@ -167,7 +222,7 @@ function D3Map(
             // Province zoom view
             $vis
                 .transition()
-                .duration(750)
+                .duration(1000)
                 .attr('transform', transform)
                 .on('end', () => {
                     $zone.attr(
@@ -178,11 +233,34 @@ function D3Map(
                     labelJoin();
                 });
         } else {
+            const selection = {
+                type: 'FeatureCollection',
+                features: topojson
+                    .feature(geo, geo.objects[electionYear]).features
+            };
+
+            const b = path.bounds(selection);
+            const zoomScale =
+                0.6 /
+                Math.max(
+                    (b[1][0] - b[0][0]) / viewport[4],
+                    (b[1][1] - b[0][1]) / viewport[5]
+                );
+            const lonCenter = (b[0][0] + b[1][0]) / 2;
+            const latCenter = (b[0][1] + b[1][1]) / 2;
+            const center = [lonCenter, latCenter];
+            const translate = [
+                zoomScale * -center[0] + viewport[2] - 180,
+                zoomScale * -center[1] + viewport[3] - 100
+            ];
+
+            let transform = `translate(${translate[0]}, ${translate[1]}) scale(${zoomScale})`;
+
             // Thailand view
             $vis
                 .transition()
-                .duration(750)
-                .attr('transform', '')
+                .duration(1000)
+                .attr('transform', transform)
                 .on('end', () => {
                     $zone.attr(
                         'fill',
@@ -406,7 +484,7 @@ function D3Map(
             .attr('class', 'zone-border')
             .attr('d', path)
             .attr('fill', 'transparent')
-            .attr('stroke-width', '0.1')
+            .attr('stroke-width', '1')
             .attr('stroke', 'black')
             .attr('vector-effect', 'non-scaling-stroke');
     }
@@ -470,7 +548,7 @@ function D3Map(
         $border_zone.call(updateBorderZone);
     };
 
-    return { render, setVis, setElectionYear, setProvince, setViewport, setScope };
+    return { render, setVis, setElectionYear, setProvince, setZone, setViewport, setScope };
 }
 
 function fillFactory($defs, isTablet, uid = '') {

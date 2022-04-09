@@ -1,32 +1,26 @@
 import React, { useEffect, useContext } from 'react';
 import { useParams, withRouter } from 'react-router-dom';
 import MapContext from '../../../map/context';
-import Dropdown from '../Dropdown';
-// import { ELECTION_SCOPE } from './../../../config';
+import DropdownProvinces from '../DropdownProvinces';
+import DropdownZones from '../DropdownZones';
 
 const Scope = props => {
-    const { scope: paramScope } = useParams();
-    const { province, scope, setScope } = useContext(MapContext);
-
-    useEffect(() => {
-        if (!paramScope) return;
-        setScope(`${paramScope}`);
-    }, [paramScope]);
+    const { province, setProvince, zone } = useContext(MapContext);
 
     return (
         <div>
             <div className='year-choice--list'>
-                <div className='year-choice--list-item' onClick={() => { props.history.push(`/2562`) }}>
+                <div className='year-choice--list-item' onClick={() => { props.history.push(`/2562`); setProvince('ประเทศไทย'); }}>
                     ประเทศไทย
                 </div>
 
                 <div>
-                    <Dropdown >{province}</Dropdown>
+                    <DropdownProvinces>{province}</DropdownProvinces>
                 </div>
 
-                {/* <button className='year-choice--list-item'>
-                    เขต
-                </button> */}
+                <div>
+                    <DropdownZones province={province}>{zone}</DropdownZones>
+                </div>
             </div>
         </div>
     )

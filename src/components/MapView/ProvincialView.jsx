@@ -8,7 +8,6 @@ import Overview from './Overview';
 import PartyList from './PartyList';
 import StackedBar from './StackedBar';
 
-import { NoVoteDisplay, NoBeungKanProvince } from './NationalView';
 import ProvinceAreaCompare from './ProvincialViewDetail/ProvinceAreaCompare.jsx';
 import partyColor from '../../map/color';
 import { device } from '../size';
@@ -48,9 +47,8 @@ const ToggleButton = styled.a`
 const ProvincialRight = ({ toggleShowDetail, partyChanged }) => {
     const { province, electionYear, CountryTopoJson } = useContext(MapContext);
     const [provincialProps, setProvincialProps] = useState([]);
-    const [partyView, setPartyView] = useState(true);
+    const [partyView] = useState(true);
     const numDistricts = provincialProps.length;
-    const isNovote = electionYear === 'election-2557';
 
     useEffect(() => {
         if (CountryTopoJson.length === 0) return;
@@ -87,7 +85,7 @@ const ProvincialRight = ({ toggleShowDetail, partyChanged }) => {
         byPartySorted.push({ party, candidate: winnerResult.length });
     }
     byPartySorted.sort((a, b) => b.candidate - a.candidate);
-    
+
     return (
         <div className="provincial-view">
             <h1 className="provincial-view--header">
@@ -96,124 +94,13 @@ const ProvincialRight = ({ toggleShowDetail, partyChanged }) => {
                     <i className="icon--chevron icon--chevron"></i>
                 </ToggleButton>
             </h1>
-            {isNovote ? (
-                <NoVoteDisplay view={'nationView'} />
-            ) : (
-                <>
-                    {/* <div className="provincial-view--toggle">
-                        <div
-                            className={`provincial-view--toggle-button ${partyView &&
-                                'active'}`}
-                            onClick={() => setPartyView(true)}
-                        >
-                            <div>
-                                <SeePartyMenu partyView={partyView} view={'provinceView'} />
-                            </div>
-                        </div>
-                        <div
-                            className={`provincial-view--toggle-button ${!partyView &&
-                                'active'}`}
-                            style={{ verticalAlign: 'center' }}
-                            onClick={() => setPartyView(false)}
-                        >
-                            <SeeWinnerMenu partyView={partyView} view={'provinceView'} />
-                        </div>
-                        <span
-                            className="provincial-view--toggle-active"
-                            style={{ left: !partyView && '50%' }}
-                        ></span>
-                    </div> */}
-                    {province === 'บึงกาฬ' && electionYear === 'election-2550' ? (
-                        <NoBeungKanProvince year={electionYear} />
-                    ) : (
-                        <div className="provincial-view--content">
-                            {partyView ? (
-                                <PartyList byPartySorted={byPartySorted} partyChanged={partyChanged} />
-                            ) : (
-                                <Winner provincialProps={provincialProps} />
-                            )}
-                            <Overview waffleData={byPartySorted} view={'provinceView'} />
-                        </div>
-                    )}
-                </>
-            )}
+            <div>
+                <div className="provincial-view--content">
+                    <PartyList byPartySorted={byPartySorted} partyChanged={partyChanged} />
+                    <Overview waffleData={byPartySorted} view={'provinceView'} />
+                </div>
+            </div>
         </div>
-    );
-};
-
-const Winner = ({ provincialProps }) => {
-    const { electionYear } = useContext(MapContext);
-    const [winners, setWinners] = useState([]);
-
-    useEffect(() => {
-        const districtWinners = provincialProps.forEach(
-            ({ zone_id, result, quota }) => {
-                if (!result) {
-                    return;
-                }
-                result.sort((a, b) => b.score - a.score);
-                const winnerResultArray = result
-                    .sort((a, b) => b.score - a.score)
-                    .slice(0, quota);
-                const totalScore = result.reduce(
-                    (total, cur) => (total += cur.score),
-                    0
-                );
-                winnerResultArray.forEach(val => {
-                    val.ratio = val.score / totalScore;
-                });
-                return {
-                    zone_id,
-                    winnerResultArray,
-                    result,
-                    quota,
-                    year: electionYear
-                };
-            }
-        );
-        setWinners(districtWinners);
-    }, [electionYear, provincialProps]);
-
-    const percentageFormat = d3.format('.2%');
-    return (
-        <ul className="provincial-view--list">
-            {!winners[0] ? (
-                <div></div>
-            ) : (
-                winners.map(({ zone_id, winnerResultArray, result, quota, year }) => (
-                    <li key={zone_id + year} className="provincial-view--list-item">
-                        <div>
-                            {' '}
-                            <b className="provincial-view--list-zone">เขต {zone_id}</b>
-                        </div>
-                        {winnerResultArray.map(winner => (
-                            <div
-                                className="provincial-view--list-item__winner"
-                                key={winner.first_name + winner.party}
-                            >
-                                <span
-                                    style={{
-                                        display: 'inline-block',
-                                        width: '1rem',
-                                        height: '1rem',
-                                        marginRight: '0.5rem',
-                                        backgroundColor: partyColor(year)(winner.party)
-                                    }}
-                                ></span>
-                                <a href={`https://theyworkforus.elect.in.th/people/${winner.first_name}-${winner.last_name}`} rel="noreferrer" target="_blank">{winner.title} {winner.first_name} {winner.last_name}</a>
-                                {", "}
-                                <a href={`https://theyworkforus.elect.in.th/party/${winner.party}`} rel="noreferrer" target="_blank">พรรค{winner.party}</a>
-                                {", "}
-                                <span style={{ fontFamily: 'Noto Sans', fontWeight: 500 }}>
-                                    {percentageFormat(winner.ratio)}
-                                </span>
-                            </div>
-                        ))}
-                        <StackedBar data={result} zoneQuota={quota} year={year} />
-                    </li>
-                ))
-            )}
-        </ul>
     );
 };
 
@@ -238,8 +125,7 @@ const SeePartyMenu = ({ partyView, view }) => {
     return (
         <div
             className="toggle-container"
-            style={{ fontSize: fontSize, bottom: bottom }}
-        >
+            style={{ fontSize: fontSize, bottom: bottom }}>
             <svg width={width} height={height} viewBox="0 0 18 13" style={style}>
                 <title>Group 8</title>
                 <desc>Created with Sketch.</desc>
@@ -248,8 +134,7 @@ const SeePartyMenu = ({ partyView, view }) => {
                     stroke="none"
                     strokeWidth="1"
                     fill="none"
-                    fillRule="evenodd"
-                >
+                    fillRule="evenodd">
                     <g id="master/icon/white/party" fill={color}>
                         <g id="Group-8">
                             <circle id="Oval" cx="1.5" cy="1.5" r="1.5"></circle>

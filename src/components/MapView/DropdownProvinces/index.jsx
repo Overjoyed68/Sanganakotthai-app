@@ -1,13 +1,11 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import MapContext from '../../../map/context';
-
 import './styles.scss';
 
 let allProvinces = [];
-const Dropdown = props => {
-  const { electionYear, setProvince, CountryTopoJson } = useContext(MapContext);
-  
+const DropdownProvinces = props => {
+  const { electionYear, province, setProvince, CountryTopoJson } = useContext(MapContext);
   const [filter, setFilter] = useState('');
   const [dropdownProvinces, setDropdownProvinces] = useState([]);
   const {
@@ -29,7 +27,6 @@ const Dropdown = props => {
     ).sort();
 
     allProvinces.unshift('ประเทศไทย');
-
     setDropdownProvinces(allProvinces);
   }, [electionYear, CountryTopoJson]);
 
@@ -48,9 +45,10 @@ const Dropdown = props => {
   return (
     <div className="dropdown--container" ref={ref}>
       <div
-        className="dropdown--button"
-        onClick={() => setShowItems(prev => !prev)}
-      >
+        // className="dropdown--button"
+        className={`dropdown--button ${`${province}` !==
+        'ประเทศไทย' && 'dropdown--button__active'}`}
+        onClick={() => setShowItems(prev => !prev)}>
         {props.children === 'ประเทศไทย' ? 'จังหวัด' : props.children}
         <i className="dropdown--chevron"></i>
       </div>
@@ -110,4 +108,4 @@ function useComponentVisible(initialIsVisible) {
   return { ref, isComponentVisible, setIsComponentVisible };
 }
 
-export default withRouter(Dropdown);
+export default withRouter(DropdownProvinces);

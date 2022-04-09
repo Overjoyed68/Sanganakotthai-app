@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import _ from 'lodash';
-
 import { withRouter } from 'react-router-dom';
 import MapContext from '../../../map/context';
 import './styles.scss';
@@ -53,7 +52,7 @@ const Party = props => {
 
     return (
         <div>
-            <div className='bar--lower bar--lowern__right' style={{ backgroundColor: '#00AA4E' }}>
+            <div className='bar--lower bar--lower__right' style={{ backgroundColor: '#00AA4E' }}>
                 <div className='national-view green-bg'>
                     <h1 className='national-view--text'>{numZone} เขต {numCandidate} คน</h1>
                     <h1 className='national-view--text'>พรรคสร้างอนาคตไทย</h1>

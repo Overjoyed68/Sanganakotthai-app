@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import _ from 'lodash';
-
 import { withRouter } from 'react-router-dom';
 import MapContext from '../../../map/context';
 import './styles.scss';
@@ -8,10 +6,6 @@ import './styles.scss';
 const TargetPartyProvincial = props => {
     const { province, electionYear, CountryTopoJson } = useContext(MapContext);
     const [provincialProps, setProvincialProps] = useState([]);
-    const [partyView, setPartyView] = useState(true);
-    const numDistricts = provincialProps.length;
-    const isNovote = electionYear === 'election-2557';
-
 
     useEffect(() => {
         if (CountryTopoJson.length === 0) return;
@@ -51,13 +45,12 @@ const TargetPartyProvincial = props => {
     }
     byPartySorted.sort((a, b) => b.candidate - a.candidate);
     let selectedParty = byPartySorted.find(x => x.party === props.selectedParty)
-    console.log(selectedParty);
 
     return (
         <div>
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view'>
-                    <h1 className='national-view--text--center'>{numZone} เขต {numCandidate} คน </h1>
+                    <h1 className='national-view--text'>{numZone} เขต {numCandidate} คน </h1>
                     <h1 className='national-view--text'>พรรค{selectedParty ? selectedParty.party : (byPartySorted.length > 0 && byPartySorted[0].party)}</h1>
                     <h1 className='national-view--number'>{selectedParty ? selectedParty.candidate : (byPartySorted.length > 0 && byPartySorted[0].candidate)} </h1>
                     <h1 className='national-view--text'>คน </h1>

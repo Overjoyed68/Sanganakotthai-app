@@ -10,7 +10,6 @@ import { ELECTION_YEAR } from '../config';
 import { isTablet, isLaptop, device } from './size';
 
 import StackedBar from './MapView/StackedBar';
-// import { NoVoteDisplay, NoBeungKanProvince } from './MapView/NationalView';
 // import { SeePartyMenu, SeeWinnerMenu } from './MapView/ProvincialView';
 import D3Compare from './MapView/ProvincialViewDetail/D3Compare';
 
@@ -523,8 +522,6 @@ const TitleZone = ({ province, zone, numCandidateByZone }) => {
 };
 
 const PartyCard = ({ data = {} }) => {
-    const { year: paramYear } = useParams();
-    const isNovote = data.year === 'election-2557';
     const numCandidateByZone = data.data.reduce(
         (acc, val) => acc + val.candidate,
         0
@@ -537,36 +534,26 @@ const PartyCard = ({ data = {} }) => {
                 numCandidateByZone={numCandidateByZone}
             />
             <LineHr />
-            {isNovote ? (
-                // <NoVoteDisplay view={'compareView'} />
-                <div></div>
-            ) : (
-                <UlPartyList>
-                    {data.province === 'บึงกาฬ' && data.year === 'election-2550' ? (
-                        // <NoBeungKanProvince year={paramYear} />
-                        <div></div>
-                    ) : (
-                        data.data.map(({ party, candidate }) => (
-                            <LiPartyList key={party}>
-                                <span
-                                    className="party-list--party-box"
-                                    style={{
-                                        backgroundColor: partyColor(data.year)(party)
-                                    }}
-                                ></span>
-                                <a href={`https://theyworkforus.elect.in.th/party/${party}`} target="_blank">พรรค{party}</a>
-                                {' '}
-                                <span className="party-list--count">
-                                    <span style={{ fontFamily: 'Noto Sans', fontWeight: 500 }}>
-                                        {candidate}
-                                    </span>{' '}
-                                    คน
-                                </span>
-                            </LiPartyList>
-                        ))
-                    )}
-                </UlPartyList>
-            )}
+            <UlPartyList>
+                {data.data.map(({ party, candidate }) => (
+                    <LiPartyList key={party}>
+                        <span
+                            className="party-list--party-box"
+                            style={{
+                                backgroundColor: partyColor(data.year)(party)
+                            }}
+                        ></span>
+                        <a href={`https://theyworkforus.elect.in.th/party/${party}`} target="_blank">พรรค{party}</a>
+                        {' '}
+                        <span className="party-list--count">
+                            <span style={{ fontFamily: 'Noto Sans', fontWeight: 500 }}>
+                                {candidate}
+                            </span>{' '}
+                            คน
+                        </span>
+                    </LiPartyList>
+                ))}
+            </UlPartyList>
         </PartyCardContainer>
     );
 };
@@ -597,61 +584,52 @@ const PersonCard = ({ data = {} }) => {
                 numCandidateByZone={numCandidateByZone}
             />
             <LineHr />
-            {isNovote ? (
-                // <NoVoteDisplay view={'compareView'} />
-                <div></div>
-            ) : (
-                <ul className="provincial-view--list">
-                    {data.province === 'บึงกาฬ' && data.year === 'election-2550' ? (
-                        // <NoBeungKanProvince />
-                        <div></div>
-                    ) : (
-                        <div>
-                            {districtWinners.map(
-                                ({ zone_id, winnerResultArray, result, quota, year }) => (
-                                    <li
-                                        key={zone_id + data.year}
-                                        className="provincial-view--list-item"
+
+            <ul className="provincial-view--list">
+                <div>
+                    {districtWinners.map(
+                        ({ zone_id, winnerResultArray, result, quota, year }) => (
+                            <li
+                                key={zone_id + data.year}
+                                className="provincial-view--list-item"
+                            >
+                                <div>
+                                    {' '}
+                                    <b className="provincial-view--list-zone">
+                                        เขต {zone_id}
+                                    </b>
+                                </div>
+                                {winnerResultArray.map(winner => (
+                                    <div
+                                        className="provincial-view--list-item__winner"
+                                        key={winner.first_name + winner.party}
                                     >
-                                        <div>
-                                            {' '}
-                                            <b className="provincial-view--list-zone">
-                                                เขต {zone_id}
-                                            </b>
-                                        </div>
-                                        {winnerResultArray.map(winner => (
-                                            <div
-                                                className="provincial-view--list-item__winner"
-                                                key={winner.first_name + winner.party}
-                                            >
-                                                <span
-                                                    style={{
-                                                        display: 'inline-block',
-                                                        width: '1rem',
-                                                        height: '1rem',
-                                                        marginRight: '0.5rem',
-                                                        backgroundColor: partyColor(data.year)(winner.party)
-                                                    }}
-                                                ></span>
-                                                <a href={`https://theyworkforus.elect.in.th/people/${winner.first_name}-${winner.last_name}`} target="_blank">{winner.title} {winner.first_name} {winner.last_name}</a>
-                                                {", "}
-                                                <a href={`https://theyworkforus.elect.in.th/party/${winner.party}`} target="_blank">พรรค{winner.party}</a>
-                                                {', '}
-                                                <span
-                                                    style={{ fontFamily: 'Noto Sans', fontWeight: 500 }}
-                                                >
-                                                    {percentageFormat(winner.ratio)}
-                                                </span>
-                                            </div>
-                                        ))}
-                                        <StackedBar data={result} zoneQuota={quota} year={year} />
-                                    </li>
-                                )
-                            )}
-                        </div>
+                                        <span
+                                            style={{
+                                                display: 'inline-block',
+                                                width: '1rem',
+                                                height: '1rem',
+                                                marginRight: '0.5rem',
+                                                backgroundColor: partyColor(data.year)(winner.party)
+                                            }}
+                                        ></span>
+                                        <a href={`https://theyworkforus.elect.in.th/people/${winner.first_name}-${winner.last_name}`} target="_blank">{winner.title} {winner.first_name} {winner.last_name}</a>
+                                        {", "}
+                                        <a href={`https://theyworkforus.elect.in.th/party/${winner.party}`} target="_blank">พรรค{winner.party}</a>
+                                        {', '}
+                                        <span
+                                            style={{ fontFamily: 'Noto Sans', fontWeight: 500 }}
+                                        >
+                                            {percentageFormat(winner.ratio)}
+                                        </span>
+                                    </div>
+                                ))}
+                                <StackedBar data={result} zoneQuota={quota} year={year} />
+                            </li>
+                        )
                     )}
-                </ul>
-            )}
+                </div>
+            </ul>
         </PersonCardContainer>
     );
 };
@@ -755,17 +733,13 @@ const CompareView = () => {
                         <div
                             className={`provincial-view--toggle-button ${partyView &&
                                 'active'}`}
-                            onClick={() => setPartyView(true)}
-                        >
-                            {/* <SeePartyMenu partyView={partyView} view={'compareView'} /> */}
+                            onClick={() => setPartyView(true)}>
                             <div></div>
                         </div>
                         <div
                             className={`provincial-view--toggle-button ${!partyView &&
                                 'active'}`}
-                            onClick={() => setPartyView(false)}
-                        >
-                            {/* <SeeWinnerMenu partyView={partyView} view={'compareView'} /> */}
+                            onClick={() => setPartyView(false)}>
                             <div></div>
                         </div>
                         <span
@@ -778,7 +752,7 @@ const CompareView = () => {
                     <DropdownCompare>{paramProvince}</DropdownCompare>
                 </DropDownContainer>
             </Header>
-            {!partyData ? (
+            {/* {!partyData ? (
                 <div
                     style={{
                         width: '100%',
@@ -798,7 +772,7 @@ const CompareView = () => {
                     party={partyData}
                     person={personData}
                 />
-            )}
+            )} */}
         </Container>
     );
 };

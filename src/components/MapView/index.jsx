@@ -1,17 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Dropdown from './Dropdown';
 import { NationalLeft, NationalRight } from './NationalView';
 import { ProvincialLeft, ProvincialRight } from './ProvincialView';
-import MapContext from '../../map/context';
-import MobileTopNav from './MobileTopNav';
-import MobileSelectYear from './MobileSelectYear';
 
 import TargetParty from './TargetParty';
 import TargetPartyProvincial from './TargetPartyProvincial';
 import Party from './Party';
+import Footer from './Footer';
 
 const Contianer = styled.div`
   position: fixed;
@@ -24,14 +21,10 @@ const Contianer = styled.div`
 `;
 
 const MapView = () => {
-    const { province } = useContext(MapContext);
     const [showMobileDetail, setShowMobileDetail] = useState(false);
 
     function toggleMobileDetail() {
         setShowMobileDetail(!showMobileDetail);
-    }
-    function hideMobileDetail() {
-        setShowMobileDetail(false);
     }
 
     const [selectedParty, setSelectedParty] = useState('')
@@ -43,12 +36,6 @@ const MapView = () => {
     return (
         <Contianer>
             <aside className="bar bar__left">
-                <div className="bar--upper__left">
-                    <Route
-                        path="/:year/:province"
-                        render={() => <MobileTopNav hideDetail={hideMobileDetail} />}
-                    />
-                </div>
                 <div className="bar--lower__left">
                     <Route path="/:year?/:province?" exact component={NationalLeft} />
                     <Route path="/:year/:province" component={ProvincialLeft} />
@@ -64,7 +51,6 @@ const MapView = () => {
                     {/* <label className='chane-label'>จำนวนผู้มีสิทธิเลือกตั้ง</label> */}
                 </div>
             </aside>
-
 
             <aside className={`bar bar__right`} style={{ marginLeft: 'auto' }}>
                 <div>
@@ -103,9 +89,6 @@ const MapView = () => {
                     <Party selectedParty={selectedParty} />
                 </div>
             </aside>
-
-
-
         </Contianer>
     );
 };

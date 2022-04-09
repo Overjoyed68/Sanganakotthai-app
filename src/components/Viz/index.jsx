@@ -82,7 +82,7 @@ const Map = props => {
     const [h, setH] = useState(window.innerHeight - sitenavHeight);
     const visRef = useRef();
     const tooltipZoneRef = useRef();
-    const { province, electionYear, CountryTopoJson } = useContext(MapContext);
+    const { province, zone, electionYear, CountryTopoJson } = useContext(MapContext);
     const [tooltips, setTooltips] = useState([]);
     const [loading, setLoading] = useState(false);
     const [tooltipsStyles, setTooltipStyles] = useState({
@@ -103,6 +103,7 @@ const Map = props => {
             props.history.push,
             electionYear,
             province,
+            zone,
             isTablet() ? 1500 : 2250,
             setTooltips
         );
@@ -144,6 +145,11 @@ const Map = props => {
         map.setProvince(province);
     }, [province, CountryTopoJson]);
 
+    useEffect(() => {
+        if (!map) return;
+        map.setZone(zone);
+    }, [zone, CountryTopoJson]);
+
     return (
         <figure className="viz-layer">
             <div
@@ -167,8 +173,8 @@ const Map = props => {
 
                             if (top > 80) {
                                 setTooltipStyles({
-                                    top: e.clientY - 100 - offset,
-                                    left: e.clientX + 200,
+                                    top: e.clientY - offset,
+                                    left: e.clientX,
                                     overflow: 'hidden',
                                     transform: 'translate(-50%, -50%)',
                                     opacity: 1

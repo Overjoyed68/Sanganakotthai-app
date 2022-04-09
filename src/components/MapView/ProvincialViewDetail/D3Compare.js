@@ -16,7 +16,7 @@ function D3Compare(
   $defs,
   dimension,
   initScale,
-  setTooltips = () => {}
+  setTooltips = () => { }
 ) {
   const getZoneFeature = (topo, object_name, province_name) => {
     const { type, geometries } = topo.objects[object_name];
@@ -40,7 +40,7 @@ function D3Compare(
         type,
         geometries: provinceGeometries
       },
-      function(a, b) {
+      function (a, b) {
         return a === b;
       }
     );
@@ -54,6 +54,7 @@ function D3Compare(
       `election-${_.last(compareYears)}`,
       province
     );
+    
     const pb = d3.geoBounds(zf);
     const size = Math.max(pb[1][0] - pb[0][0], pb[1][1] - pb[0][1]);
     const simplifyScale = d3
@@ -111,7 +112,7 @@ function D3Compare(
       .attr('stroke-width', '0.6')
       .attr('stroke', 'black')
       .attr('vector-effect', 'non-scaling-stroke')
-      .each(function(d) {
+      .each(function (d) {
         const year = this.parentElement.getAttribute('data-election-year');
 
         d3.select(this)
@@ -192,7 +193,7 @@ function D3Compare(
     setTooltips([]);
   }
 
-  const render = year => {};
+  const render = year => { };
 
   return { render, handleProvinceChange };
 }

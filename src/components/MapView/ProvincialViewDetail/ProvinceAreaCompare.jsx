@@ -145,7 +145,6 @@ const ProvinceAreaCompare = props => {
                             width="100%"
                             height="100%"
                         >
-                            {year === '2550' && <defs id={`map-defs-compare`}></defs>}
                             <text fontSize="32px" textAnchor="middle" x="50%" y="40px">
                                 {year}
                             </text>

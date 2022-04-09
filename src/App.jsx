@@ -9,12 +9,13 @@ import Viz from './components/Viz';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // import CompareView from './components/CompareView';
 import MapView from './components/MapView';
+import Footer from "./components/MapView/Footer";
 
 
 function App() {
   const [province, setProvince] = useState('ประเทศไทย');
   const [electionYear, setElectionYear] = useState('election-2562');
-  const [scope, setScope] = useState('ประเทศไทย');
+  const [zone, setZone] = useState('เขต')
   const [CountryTopoJson] = useFetch();
 
   return (
@@ -25,29 +26,24 @@ function App() {
           setElectionYear,
           province,
           setProvince,
-          scope,
-          setScope,
+          zone,
+          setZone,
           CountryTopoJson
-        }}
-      >
-
+        }}>
         <BrowserRouter>
           <Nav />
           <main>
             <article className="detail-layer">
               <Switch>
-                {/* <Route path="/:year/compare/:province" component={CompareView} /> */}
-                {/* <Route path="/:year?" component={MapView} /> */}
-                <Route path="/:country?" component={MapView} />
-                {/* <Route path="/:year/:scope" /> */}
+                <Route path="/:year?" component={MapView} />
               </Switch>
             </article>
             <Viz />
           </main>
         </BrowserRouter>
-
-
       </MapContext.Provider>
+
+      <Footer />
     </div>
   );
 }
