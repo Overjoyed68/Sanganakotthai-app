@@ -43,3 +43,16 @@
     }
   }
 }
+
+.feedback-btn {
+  font-family: 'Kanit', sans-serif;
+  width: 100%;
+  text-align: center;
+  background-color: #3D58A2;
+  font-size: 2rem;
+  color: var(--color-white);
+  cursor: pointer;
+  border-radius: calc(var(--border-radius) - 0.5rem);
+  border: none;
+  padding: 1rem;
+}

@@ -5,7 +5,7 @@ import MapContext from '../../../map/context';
 import './styles.scss';
 
 const Party = props => {
-    const { setProvince, CountryTopoJson, electionYear } = useContext(MapContext);
+    const { setProvince, CountryTopoJson, electionYear, zone } = useContext(MapContext);
     const [nationalProps, setNationalProps] = useState([]);
 
     useEffect(() => {
@@ -76,6 +76,18 @@ const Party = props => {
                     <h1 className='national-view--text'>เป้าหมาย (คน)</h1>
                 </div>
             </div>
+
+            {console.log('z', zone)}
+            {zone === 'เขต' ?
+                (
+                    <div>
+                    </div>
+                ) : (
+                    <div className='bar--lower bar--lower__right' onClick={() => props.history.push(`/feedback`)}>
+                        <button className='feedback-btn'>Feedback ประชาชน</button>
+                    </div>
+                )
+            }
 
         </div>
     )

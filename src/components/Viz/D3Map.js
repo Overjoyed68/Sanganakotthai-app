@@ -241,7 +241,7 @@ function D3Map(
 
             const b = path.bounds(selection);
             const zoomScale =
-                0.6 /
+                0.7 /
                 Math.max(
                     (b[1][0] - b[0][0]) / viewport[4],
                     (b[1][1] - b[0][1]) / viewport[5]
@@ -463,7 +463,7 @@ function D3Map(
             .attr('class', 'country-border')
             .attr('d', path)
             .attr('fill', 'transparent')
-            .attr('stroke-width', '1.2')
+            .attr('stroke-width', '0.8')
             .attr('stroke', 'black')
             .attr('vector-effect', 'non-scaling-stroke');
     }
@@ -474,7 +474,7 @@ function D3Map(
             .attr('class', 'province-border')
             .attr('d', path)
             .attr('fill', 'transparent')
-            .attr('stroke-width', '0.6')
+            .attr('stroke-width', '0.8')
             .attr('stroke', 'black')
             .attr('vector-effect', 'non-scaling-stroke');
     }
@@ -484,7 +484,7 @@ function D3Map(
             .attr('class', 'zone-border')
             .attr('d', path)
             .attr('fill', 'transparent')
-            .attr('stroke-width', '1')
+            .attr('stroke-width', '0.5')
             .attr('stroke', 'black')
             .attr('vector-effect', 'non-scaling-stroke');
     }

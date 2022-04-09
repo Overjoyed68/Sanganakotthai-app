@@ -48,7 +48,7 @@ const MapView = () => {
 
             <aside className={`bar bar__left`}>
                 <div>
-                    {/* <label className='chane-label'>จำนวนผู้มีสิทธิเลือกตั้ง</label> */}
+                    <label className='voter-label'>จำนวนผู้มีสิทธิเลือกตั้ง xxxxxxx คน</label>
                 </div>
             </aside>
 

@@ -10,6 +10,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // import CompareView from './components/CompareView';
 import MapView from './components/MapView';
 import Footer from "./components/MapView/Footer";
+import Feedback from './components/Feedback';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
 
   return (
     <div>
+
       <MapContext.Provider
         value={{
           electionYear,
@@ -32,18 +34,28 @@ function App() {
         }}>
         <BrowserRouter>
           <Nav />
-          <main>
-            <article className="detail-layer">
-              <Switch>
-                <Route path="/:year?" component={MapView} />
-              </Switch>
-            </article>
-            <Viz />
-          </main>
+          <Switch>
+
+            <Route exact path="/feedback">
+              <Feedback />
+            </Route>
+
+            <Route path="/:year?">
+              <main>
+                <article className="detail-layer">
+                  <MapView />
+                </article>
+                <Viz />
+              </main>
+              <Footer />
+            </Route>
+
+
+          </Switch>
         </BrowserRouter>
       </MapContext.Provider>
 
-      <Footer />
+
     </div>
   );
 }
