@@ -55,26 +55,26 @@ const TargetParty = props => {
         <div>
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view'>
-                    <h1 className='national-view--text'>{numZone} เขต {numCandidate} คน </h1>
-                    <h1 className='national-view--text'>พรรค{selectedParty ? selectedParty.party : (byPartySorted.length > 0 && byPartySorted[0].party)} </h1>
-                    <h1 className='national-view--number'>{selectedParty ? selectedParty.candidate : (byPartySorted.length > 0 && byPartySorted[0].candidate)} </h1>
-                    <h1 className='national-view--text'>คน </h1>
+                    <h1 className='national-view--text national-view--text--blue'>{numZone} เขต {numCandidate} คน </h1>
+                    <h1 className='national-view--text national-view--text--blue'>พรรค{selectedParty ? selectedParty.party : (byPartySorted.length > 0 && byPartySorted[0].party)} </h1>
+                    <h1 className='national-view--number national-view--text--blue'>{selectedParty ? selectedParty.candidate : (byPartySorted.length > 0 && byPartySorted[0].candidate)} </h1>
+                    <h1 className='national-view--text national-view--text--blue'>คน </h1>
                 </div>
             </div>
 
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view'>
-                    <h1 className='national-view--text'>จำนวนเสียง</h1>
-                    <h1 className='national-view--number'>{selectedParty ? selectedParty.score : (byPartySorted.length > 0 && byPartySorted[0].score)}</h1>
-                    <h1 className='national-view--text'>คะแนน</h1>
+                    <h1 className='national-view--text national-view--text--blue'>จำนวนเสียง</h1>
+                    <h1 className='national-view--number national-view--text--blue'>{selectedParty ? selectedParty.score : (byPartySorted.length > 0 && byPartySorted[0].score)}</h1>
+                    <h1 className='national-view--text national-view--text--blue'>คะแนน</h1>
                 </div>
             </div>
 
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view'>
-                    <h1 className='national-view--text'>เป้าหมาย</h1>
-                    <h1 className='national-view--number'>{selectedParty ? selectedParty.candidate + Math.round(selectedParty.candidate * 0.1) : (byPartySorted.length > 0 && byPartySorted[0]["candidate"] + Math.round(byPartySorted[0]["candidate"] * 0.1))}</h1>
-                    <h1 className='national-view--text'>คน</h1>
+                    <h1 className='national-view--text national-view--text--blue'>เป้าหมาย</h1>
+                    <h1 className='national-view--number national-view--text--blue'>{selectedParty ? selectedParty.candidate + Math.round(selectedParty.candidate * 0.1) : (byPartySorted.length > 0 && byPartySorted[0]["candidate"] + Math.round(byPartySorted[0]["candidate"] * 0.1))}</h1>
+                    <h1 className='national-view--text national-view--text--blue'>คน</h1>
                 </div>
             </div>
 

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import './styles.scss';
 import partyColor from '../../../map/color';
 import MapContext from '../../../map/context';
+import partyLogo from '../../../map/logo';
 
 const Overview = ({ waffleData, view }) => {
   const { electionYear } = useContext(MapContext);
@@ -18,9 +19,12 @@ const Overview = ({ waffleData, view }) => {
               key={party + i}
               className="waffle--waffle"
               style={{
-                backgroundColor: partyColor(electionYear)(party),
-                width: width,
-                height: height
+                backgroundColor: '#fff',
+                backgroundImage: 'url(' + process.env.PUBLIC_URL + '/logo/' + partyLogo(electionYear)(party) + ')',
+                backgroundSize: '1.5rem',
+                width: '1.5rem',
+                height: '1.5rem',
+                margin: '0.2rem'
               }}
             >
               <span
@@ -31,7 +35,7 @@ const Overview = ({ waffleData, view }) => {
                   className="waffle--waffle__tooltipcolor"
                   style={{
                     display: 'inline-block',
-                    backgroundColor: partyColor(electionYear)(party),
+                    // backgroundColor: partyColor(electionYear)(party),
                     width: '1rem',
                     height: '1rem',
                     marginRight: '.5rem'

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import MapContext from '../../map/context';
 import { device } from '../size';
 import Scope from './Scope';
-import partyColor from '../../map/color';
+import partyLogo from '../../map/logo';
 
 const NationalLeft = () => {
     return <Scope />
@@ -35,7 +35,7 @@ const NationalRight = ({ toggleShowDetail, partyChanged }) => {
     useEffect(() => {
         setProvince('ประเทศไทย');
     }, []);
-    
+
     useEffect(() => {
         if (CountryTopoJson.length === 0) return;
         const nationalProps = CountryTopoJson.objects[electionYear].geometries.map(
@@ -78,29 +78,31 @@ const NationalRight = ({ toggleShowDetail, partyChanged }) => {
                 </Loader>
             ) : (
                 <div className="national-view">
-                        <div className="national-view--content">
-                            <ul className="party-list--list">
-                                {byPartySorted.map(({ party, candidate }) => (
-                                    <li key={party} className="party-list--list-item">
-                                        <span
-                                            className="party-list--party-box"
-                                            style={{
-                                                backgroundColor: partyColor(electionYear)(party)
-                                            }}
-                                        ></span>
-                                        <a onClick={() => partyChanged(party)}>พรรค{party}</a>
+                    <div className="national-view--content">
+                        <ul className="party-list--list">
+                            {byPartySorted.map(({ party, candidate }) => (
+                                <li key={party} className="party-list--list-item">
+                                    <span
+                                        className="party-list--party-box"
+                                        style={{
+                                            backgroundColor: '#fff',
+                                            backgroundImage: 'url(' + process.env.PUBLIC_URL + '/logo/' + partyLogo(electionYear)(party) + ')',
+                                            backgroundSize: '1.5rem'
+                                        }}
+                                    ></span>
+                                    <a style={{ verticalAlign: 'super' }} onClick={() => partyChanged(party)}>พรรค{party}</a>
+                                    {' '}
+                                    <span className="party-list--count">
                                         {' '}
-                                        <span className="party-list--count">
-                                            {' '}
-                                            <span style={{ fontFamily: 'Noto Sans', fontWeight: 500 }}>
-                                                {candidate}
-                                            </span>{' '}
-                                            คน
-                                        </span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                                        <span style={{ fontFamily: 'Noto Sans', fontWeight: 500 }}>
+                                            {candidate}
+                                        </span>{' '}
+                                        คน
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             )}
         </div>

@@ -19,7 +19,7 @@
   }
 
   &--green {
-    background-color: #00AA4E;
+    background-color: var(--color-green);
   }
 
 
@@ -70,7 +70,7 @@
 .label-box {
   color: white;
   background-color: #333;
-  padding: 1rem;
+  padding: 1rem 0 1rem 1.5rem;
   width: 25rem;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
   border-radius: calc(var(--border-radius) - 0.5rem);
@@ -80,8 +80,10 @@
 
 .chance-label {
   font-size: 1.5rem;
+  font-weight: normal;
 }
 
 .voter-label {
+  font-weight: normal;
   font-size: 1.5rem;
 }

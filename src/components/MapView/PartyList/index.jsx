@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import MapContext from '../../../map/context';
-import partyColor from '../../../map/color';
+import partyLogo from '../../../map/logo';
 import './styles.scss';
 
-const PartyList = ({ byPartySorted, view, partyChanged}) => {
+const PartyList = ({ byPartySorted, view, partyChanged }) => {
   const { electionYear } = useContext(MapContext);
 
   return (
@@ -13,14 +13,16 @@ const PartyList = ({ byPartySorted, view, partyChanged}) => {
           <span
             className="party-list--party-box"
             style={{
-              backgroundColor: partyColor(electionYear)(party)
+              backgroundColor: '#fff',
+              backgroundImage: 'url(' + process.env.PUBLIC_URL + '/logo/' + partyLogo(electionYear)(party) + ')',
+              backgroundSize: '1.5rem'
             }}
           ></span>
-          <a onClick={() => partyChanged(party)}>พรรค{party}</a>
+          <a style={{ verticalAlign: 'super' }} onClick={() => partyChanged(party)}>พรรค{party}</a>
           {' '}
           <span className="party-list--count">
             {' '}
-            <span style={{ fontFamily: 'Noto Sans', fontWeight: 500 }}>
+            <span style={{ fontWeight: 500 }}>
               {candidate}
             </span>{' '}
             คน

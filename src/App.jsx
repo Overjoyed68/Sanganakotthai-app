@@ -7,7 +7,6 @@ import useFetch from './map/useFetch';
 
 import Viz from './components/Viz';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-// import CompareView from './components/CompareView';
 import MapView from './components/MapView';
 import Footer from "./components/MapView/Footer";
 import Feedback from './components/Feedback';

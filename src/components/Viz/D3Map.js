@@ -14,8 +14,7 @@ function D3Map(
     initProvince,
     initZone,
     initScale,
-    setTooltips,
-    initScope
+    setTooltips
 ) {
     let $vis,
         $map,
@@ -30,7 +29,7 @@ function D3Map(
         province = initProvince,
         zone = initZone;
     const SCALE = initScale;
-    let scope = initScope;
+    let previouseSelectedProvince = 'ประเทศไทย';
 
     let projection = d3
         .geoMercator()
@@ -69,11 +68,6 @@ function D3Map(
         setProvince(province);
         setZone(zone);
     };
-
-    const setScope = newScope => {
-        console.log('newScope', newScope)
-        scope = newScope;
-    }
 
     const setElectionYear = year => {
         electionYear = year;
@@ -376,17 +370,16 @@ function D3Map(
                 d => `zone province-${d.properties.province_id} zone-${d.properties.id}`
             )
             .attr('d', path)
-            .on('click', ({ properties: { province_name } }) => {
-                if (isTablet()) {
-                    // On mobile, no-op when click current province
-                    province_name === province
-                        ? push()
-                        : push(`/${electionYear.slice(-4)}/${province_name}`);
+            .on('click', ({ properties: { province_name, zone_name } }) => {
+                if (previouseSelectedProvince === province_name) {
+                    setZone(zone_name);
                 } else {
                     province_name === province
                         ? push(`/${electionYear.slice(-4)}`)
                         : push(`/${electionYear.slice(-4)}/${province_name}`);
                 }
+
+                previouseSelectedProvince = province_name;
             })
             .on('mouseenter', setTooltipContent)
             .attr('fill', fillFactory($defs, 'normal')(electionYear)(province));
@@ -548,7 +541,7 @@ function D3Map(
         $border_zone.call(updateBorderZone);
     };
 
-    return { render, setVis, setElectionYear, setProvince, setZone, setViewport, setScope };
+    return { render, setVis, setElectionYear, setProvince, setZone, setViewport };
 }
 
 function fillFactory($defs, isTablet, uid = '') {

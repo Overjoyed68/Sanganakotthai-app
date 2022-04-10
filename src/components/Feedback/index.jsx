@@ -19,7 +19,7 @@ const Feedback = () => {
                     </div>
 
                     <div className='demand-image-container'>
-                        <img className='demand-image' src={process.env.PUBLIC_URL + '/h1.jpeg'} />
+                        <img className='demand-image' src={process.env.PUBLIC_URL + '/images/h1.jpeg'} />
                     </div>
 
                     <div className='order'>
@@ -27,7 +27,7 @@ const Feedback = () => {
                     </div>
 
                     <div className='demand-image-container'>
-                        <img className='demand-image' src={process.env.PUBLIC_URL + '/h2.jpeg'} />
+                        <img className='demand-image' src={process.env.PUBLIC_URL + '/images/h2.jpeg'} />
                     </div>
 
                     <div className='order'>
@@ -35,7 +35,7 @@ const Feedback = () => {
                     </div>
 
                     <div className='demand-image-container'>
-                        <img className='demand-image' src={process.env.PUBLIC_URL + '/h3.jpeg'} />
+                        <img className='demand-image' src={process.env.PUBLIC_URL + '/images/h3.jpeg'} />
                     </div>
 
                     <div className='order'>
@@ -43,7 +43,7 @@ const Feedback = () => {
                     </div>
 
                     <div className='demand-image-container'>
-                        <img className='demand-image' src={process.env.PUBLIC_URL + '/h4.jpeg'} />
+                        <img className='demand-image' src={process.env.PUBLIC_URL + '/images/h4.jpeg'} />
                     </div>
 
                     <div className='order'>
@@ -51,7 +51,7 @@ const Feedback = () => {
                     </div>
 
                     <div className='demand-image-container'>
-                        <img className='demand-image' src={process.env.PUBLIC_URL + '/h5.jpeg'} />
+                        <img className='demand-image' src={process.env.PUBLIC_URL + '/images/h5.jpeg'} />
                     </div>
                 </div>
 

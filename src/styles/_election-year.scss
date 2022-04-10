@@ -34,7 +34,7 @@
     }
 
     &__active {
-      background-color: #00AA4E;
+      background-color: var(--color-green);
       color: var(--color-white);
     }
   }

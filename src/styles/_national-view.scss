@@ -3,7 +3,7 @@
   width: 20rem;
 
   &--green-bg {
-    background-color: #00AA4E;
+    background-color: var(--color-green);
     cursor: pointer;
     border-radius: calc(var(--border-radius) - 0.5rem);
     color: white;
@@ -16,6 +16,11 @@
   &--text {
     font-size: 1rem;
     text-align: center;
+    font-weight: normal;
+
+    &--blue {
+      color: var(--color-blue);
+    }
   }
 
   &--number {

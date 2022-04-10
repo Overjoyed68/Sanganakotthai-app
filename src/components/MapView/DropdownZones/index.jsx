@@ -24,12 +24,14 @@ const DropdownZones = props => {
             new Set(
                 CountryTopoJson.objects[electionYear].geometries.map(
                     d => ({
+                        province_id: Number(d.properties.province_id),
+                        zone_id: d.properties.zone_id,
                         province_name: d.properties.province_name,
                         zone_name: d.properties.zone_name
                     })
                 )
             )
-        ).sort();
+        ).sort((a, b) => a.province_id - b.province_id);
         zoneList = allZones;
         setDropdownZones(allZones);
     }, [electionYear, CountryTopoJson]);
@@ -51,7 +53,7 @@ const DropdownZones = props => {
             allZones = zoneList;
             setZone('เขต');
         } else {
-            allZones = zoneList.filter(data => data.province_name === province);
+            allZones = zoneList.filter(data => data.province_name === province).sort();
             setProvince(province);
             const isZoneAvailable = allZones.findIndex(value => value.zone_name === zone);
             if (isZoneAvailable === -1) setZone('เขต');

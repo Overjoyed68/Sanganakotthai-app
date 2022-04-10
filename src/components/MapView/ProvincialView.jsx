@@ -9,7 +9,6 @@ import PartyList from './PartyList';
 import StackedBar from './StackedBar';
 
 import ProvinceAreaCompare from './ProvincialViewDetail/ProvinceAreaCompare.jsx';
-import partyColor from '../../map/color';
 import { device } from '../size';
 
 const ProvincialLeft = () => {
