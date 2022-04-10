@@ -174,7 +174,7 @@ function D3Map(
                 .on('end', () => {
                     $zone.attr(
                         'fill',
-                        fillFactory($defs, 'normal')(electionYear)(zone)
+                        fillFactory($defs, 'normal')(electionYear)(province)
                     ); // post map-panning
                     updatePatternTransform.call($vis.node(), 'zoom');
                     labelJoin();
