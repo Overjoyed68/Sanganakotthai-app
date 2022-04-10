@@ -4,7 +4,7 @@
 
 .container {
     display: grid;
-    grid-template-columns: 30% auto;
+    grid-template-columns: 20% auto;
     grid-template-rows: 3rem auto;
     column-gap: 5rem;
     row-gap: 2rem;
@@ -34,10 +34,11 @@
 
 .demand-image-container {
     width: 100%;
+    text-align: center;
 }
 
 .demand-image {
-    width: 100%
+    width: 20rem;
 }
 
 

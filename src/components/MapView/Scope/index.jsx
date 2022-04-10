@@ -10,7 +10,6 @@ const Scope = props => {
     return (
         <div>
             <div className='year-choice--list'>
-                {console.log(province, zone)}
                 <div
                     className={`year-choice--list-item ${`${province}` ===
                         'ประเทศไทย' && `${zone}` ==='เขต' && 'year-choice--list-item__active'}`}

@@ -53,7 +53,8 @@ const DropdownZones = props => {
         } else {
             allZones = zoneList.filter(data => data.province_name === province);
             setProvince(province);
-            // setZone(allZones[0].zone_name)
+            const isZoneAvailable = allZones.findIndex(value => value.zone_name === zone);
+            if (isZoneAvailable === -1) setZone('เขต');
         }
         setDropdownZones(allZones);
     }, [props.province])
@@ -62,7 +63,7 @@ const DropdownZones = props => {
         <div className="dropdown--container" ref={ref}>
             <div
                 className={`dropdown--button-zone ${`${zone}` !==
-                'เขต' && 'dropdown--button-zone__active'}`}
+                    'เขต' && 'dropdown--button-zone__active'}`}
                 onClick={() => setShowItems(prev => !prev)}>
                 {props.children}
                 <i className="dropdown--chevron"></i>

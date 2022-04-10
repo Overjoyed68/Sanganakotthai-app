@@ -52,11 +52,11 @@ const CompareContainer = styled.div`
 `;
 
 const CompareMap = styled.div`
-  flex: 0 0 50%;
+  display: none;
   height: 200px;
+  width: 20rem;
   margin: 0;
   cursor: pointer;
-
   border-radius: var(--border-radius);
   background-color: var(--color-white);
   box-shadow: ${props =>

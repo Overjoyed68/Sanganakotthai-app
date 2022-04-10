@@ -52,8 +52,8 @@ const Party = props => {
 
     return (
         <div>
-            <div className='bar--lower bar--lower__right' style={{ backgroundColor: '#00AA4E' }}>
-                <div className='national-view green-bg'>
+            <div className='bar--lower bar--lower__right'>
+                <div className='national-view national-view--green-bg'>
                     <h1 className='national-view--text'>{numZone} เขต {numCandidate} คน</h1>
                     <h1 className='national-view--text'>พรรคสร้างอนาคตไทย</h1>
                     <h1 className='national-view--number'>{selectedParty ? selectedParty.candidate + Math.round(selectedParty.candidate * 0.1) : (byPartySorted.length > 0 && byPartySorted[0].candidate + Math.round(byPartySorted[0].candidate * 0.1))}</h1>
@@ -61,23 +61,22 @@ const Party = props => {
                 </div>
             </div>
 
-            <div className='bar--lower bar--lower__right' style={{ backgroundColor: '#00AA4E' }}>
-                <div className='national-view'>
+            <div className='bar--lower bar--lower__right'>
+                <div className='national-view national-view--green-bg'>
                     <h1 className='national-view--text'>จำนวนเสียง</h1>
                     <h1 className='national-view--number'>{selectedParty ? selectedParty.score + Math.round(selectedParty.score * 0.1) : (byPartySorted.length > 0 && byPartySorted[0].score + Math.round(byPartySorted[0].score * 0.1))}</h1>
                     <h1 className='national-view--text'>(เป้าหมาย) คะแนน</h1>
                 </div>
             </div>
 
-            <div className='bar--lower bar--lower__right' style={{ backgroundColor: '#00AA4E' }}>
-                <div className='national-view'>
+            <div className='bar--lower bar--lower__right'>
+                <div className='national-view national-view--green-bg'>
                     <h1 className='national-view--text'>เป้าหมาย</h1>
                     <h1 className='national-view--number'>{selectedParty ? selectedParty.candidate - Math.round(selectedParty.candidate * 0.1) : (byPartySorted.length > 0 && byPartySorted[0]["candidate"] - Math.round(byPartySorted[0]["candidate"] * 0.1))}</h1>
                     <h1 className='national-view--text'>เป้าหมาย (คน)</h1>
                 </div>
             </div>
 
-            {console.log('z', zone)}
             {zone === 'เขต' ?
                 (
                     <div>

@@ -4,15 +4,15 @@
 
     display: flex;
     flex-flow: row wrap;
-    width: 300px;
+    width: 100%;
     margin-bottom: 23px;
   }
 
   &--list-item {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold;
 
-    width: 300px;
+    width: 20rem;
     height: 65px;
     // margin-top: 15px;
     display: inline-flex;
@@ -35,8 +35,7 @@
 
     &__active {
       background-color: #00AA4E;
-      // color: black;
-      // background-color: var(--color-white);
+      color: var(--color-white);
     }
   }
 }

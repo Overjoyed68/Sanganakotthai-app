@@ -9,9 +9,9 @@
 
   &--button {
     text-align: center;
-    width: 300px;
+    width: 20rem;
     padding: var(--bar-padding);
-    font-size: 3rem;
+    font-size: 2rem;
     font-family: inherit;
     height: 6.4rem;
     font-weight: bold;
@@ -24,6 +24,7 @@
     
     &__active {
       background-color: #00AA4E;
+      color: var(--color-white);
     }
   }
 
@@ -107,7 +108,7 @@
       width: 90%;
       padding: 1rem 0;
       margin: 0 1.5rem;
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-family: inherit;
       outline: none;
       border: none;

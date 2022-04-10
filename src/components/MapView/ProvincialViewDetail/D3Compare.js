@@ -97,7 +97,7 @@ function D3Compare(
       .attr('class', 'province')
       .attr('d', path)
       .attr('fill', 'transparent')
-      .attr('stroke-width', '3')
+      .attr('stroke-width', '2')
       .attr('stroke', 'black')
       .attr('vector-effect', 'non-scaling-stroke');
 

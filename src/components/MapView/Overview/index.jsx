@@ -5,8 +5,8 @@ import MapContext from '../../../map/context';
 
 const Overview = ({ waffleData, view }) => {
   const { electionYear } = useContext(MapContext);
-  const width = view === 'nationView' ? 8 : 24;
-  const height = view === 'nationView' ? 8 : 24;
+  const width = view === 'nationView' ? 8 : 15;
+  const height = view === 'nationView' ? 8 : 15;
   return (
     <div className="overview">
       <h2 className="overview--header">Overview</h2>

@@ -151,7 +151,7 @@ function D3Map(
 
             const b = path.bounds(selection);
             const zoomScale =
-                0.7 /
+                0.6 /
                 Math.max(
                     (b[1][0] - b[0][0]) / viewport[4],
                     (b[1][1] - b[0][1]) / viewport[5]
@@ -160,13 +160,13 @@ function D3Map(
             const latCenter = (b[0][1] + b[1][1]) / 2;
             const center = [lonCenter, latCenter];
             const translate = [
-                zoomScale * -center[0] + viewport[2] - 180,
-                zoomScale * -center[1] + viewport[3]
+                zoomScale * -center[0] + viewport[2] - 60,
+                zoomScale * -center[1] + viewport[3] - 60
             ];
 
             let transform = `translate(${translate[0]}, ${translate[1]}) scale(${zoomScale})`;
 
-            // Province zoom view
+            // Zone zoom view
             $vis
                 .transition()
                 .duration(1000)
@@ -174,12 +174,12 @@ function D3Map(
                 .on('end', () => {
                     $zone.attr(
                         'fill',
-                        fillFactory($defs, 'normal')(electionYear)(province)
+                        fillFactory($defs, 'normal')(electionYear)(zone)
                     ); // post map-panning
                     updatePatternTransform.call($vis.node(), 'zoom');
                     labelJoin();
                 });
-        } 
+        }
     }
 
     const setProvince = newProvince => {
@@ -213,8 +213,8 @@ function D3Map(
             const latCenter = (b[0][1] + b[1][1]) / 2;
             const center = [lonCenter, latCenter];
             const translate = [
-                zoomScale * -center[0] + viewport[2] - 180,
-                zoomScale * -center[1] + viewport[3] - 100
+                zoomScale * -center[0] + viewport[2] - 90,
+                zoomScale * -center[1] + viewport[3] - 90
             ];
 
             let transform = `translate(${translate[0]}, ${translate[1]}) scale(${zoomScale})`;
@@ -241,7 +241,7 @@ function D3Map(
 
             const b = path.bounds(selection);
             const zoomScale =
-                0.7 /
+                0.75 /
                 Math.max(
                     (b[1][0] - b[0][0]) / viewport[4],
                     (b[1][1] - b[0][1]) / viewport[5]
@@ -250,8 +250,8 @@ function D3Map(
             const latCenter = (b[0][1] + b[1][1]) / 2;
             const center = [lonCenter, latCenter];
             const translate = [
-                zoomScale * -center[0] + viewport[2] - 180,
-                zoomScale * -center[1] + viewport[3] - 100
+                zoomScale * -center[0] + viewport[2] - 60,
+                zoomScale * -center[1] + viewport[3] - 60
             ];
 
             let transform = `translate(${translate[0]}, ${translate[1]}) scale(${zoomScale})`;
@@ -581,7 +581,7 @@ function fillFactory($defs, isTablet, uid = '') {
                     ? fillOptions.fill || 'purple' // = color not found
                     : 'gainsboro';
             };
-    };
+    }
 }
 
 function polylabelPositionFactory(projection) {
