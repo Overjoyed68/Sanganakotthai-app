@@ -1,7 +1,7 @@
 
 const party62 = partyname => {
     const logoes = {
-        เพื่อไทย: 'Pheuthai.png',
+        เพื่อไทย: 'PheuThai.png',
         ประชาธิปัตย์: 'Democrat.png',
         ชาติไทยพัฒนา: 'Chartthaipattana.png',
         ภูมิใจไทย: 'Bhumjaithai.png',
@@ -16,7 +16,6 @@ const party62 = partyname => {
     return logoes[partyname];
 }
 
-
 const partyLogo = electionYear => {
     const yearLogo = {
         'election-2562': party62
@@ -24,7 +23,6 @@ const partyLogo = electionYear => {
 
     return partyName => yearLogo[electionYear](partyName) || 'purple';
 }
-
 
 export { party62 };
 export default partyLogo;
