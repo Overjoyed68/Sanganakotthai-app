@@ -178,7 +178,6 @@ function D3Map(
 
     const setProvince = newProvince => {
         province = newProvince;
-        labelJoin();
         removeLabel();
 
         $zone
@@ -372,7 +371,7 @@ function D3Map(
             .attr('d', path)
             .on('click', ({ properties: { province_name, zone_name } }) => {
                 if (previouseSelectedProvince === province_name) {
-                    setZone(zone_name);
+                         push(`/${electionYear.slice(-4)}/${province_name}/${zone_name}`);
                 } else {
                     province_name === province
                         ? push(`/${electionYear.slice(-4)}`)

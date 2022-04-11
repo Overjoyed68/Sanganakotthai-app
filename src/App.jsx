@@ -10,6 +10,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import MapView from './components/MapView';
 import Footer from "./components/MapView/Footer";
 import Feedback from './components/Feedback';
+import { Redirect } from "react-router-dom";
 
 
 function App() {
@@ -35,11 +36,13 @@ function App() {
           <Nav />
           <Switch>
 
+            <Redirect exact from="/" to="/2562" />
+
             <Route exact path="/feedback">
               <Feedback />
             </Route>
 
-            <Route path="/:year?">
+            <Route path="/:year?/:province?/:zone?">
               <main>
                 <article className="detail-layer">
                   <MapView />

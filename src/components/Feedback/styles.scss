@@ -38,7 +38,7 @@
 }
 
 .demand-image {
-    width: 20rem;
+    width: 90%;
 }
 
 
@@ -49,22 +49,43 @@
 }
 
 .feedback-date {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .feedback-question {
-    font-size: 2rem;
+    margin-top: 1rem;
+    font-size: 1.5rem;
     width: 100%;
     background-color: lightgray;
     padding: 1rem;
+    border: none;
+}
+
+.feedback-question-options {
+    background-color: white;
+}
+
+.feedback-answer-wrapper {
+    margin-top: 1rem;
+    background-color: lightgray;
+    height: 15rem;
 }
 
 .feedback-answer {
-    margin-top: 1rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
     width: 100%;
-    height: 15rem;;
+    height: 12rem;;
     background-color: lightgray;
     padding: 1rem;
+    border: none;
 }
 
+.feedback-answer:focus {
+    outline: none;
+}
+
+.feedback-answer-label-wrapper {
+    border-top: 1px solid #000;
+    margin: 0 1rem 0 1rem;
+    padding: 0.5rem;
+}

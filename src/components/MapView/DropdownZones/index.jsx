@@ -8,7 +8,6 @@ let zoneList = [];
 
 const DropdownZones = props => {
     const { electionYear, CountryTopoJson, setZone, zone, setProvince, province } = useContext(MapContext);
-
     const [filter, setFilter] = useState('');
     const [dropdownZones, setDropdownZones] = useState([]);
     const {
@@ -17,7 +16,8 @@ const DropdownZones = props => {
         setIsComponentVisible: setShowItems
     } = useComponentVisible(false);
     const searchRef = useRef(null);
-
+    const year = electionYear.substring(electionYear.length - 4);
+    
     useEffect(() => {
         if (CountryTopoJson.length === 0) return;
         allZones = Array.from(
@@ -90,6 +90,9 @@ const DropdownZones = props => {
                                     setZone(zone_name);
                                     setProvince(province_name);
                                     setShowItems(prev => !prev);
+                                    zone === 'เขต'
+                                        ? props.history.push(`/${year}/${province}`)
+                                        : props.history.push(`/${year}/${province}/${zone}`);
                                 }}
                             >
                                 {zone_name}

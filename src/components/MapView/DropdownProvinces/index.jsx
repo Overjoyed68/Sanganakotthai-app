@@ -4,6 +4,7 @@ import MapContext from '../../../map/context';
 import './styles.scss';
 
 let allProvinces = [];
+
 const DropdownProvinces = props => {
   const { electionYear, province, setProvince, CountryTopoJson } = useContext(MapContext);
   const [filter, setFilter] = useState('');
@@ -45,7 +46,6 @@ const DropdownProvinces = props => {
   return (
     <div className="dropdown--container" ref={ref}>
       <div
-        // className="dropdown--button"
         className={`dropdown--button ${`${province}` !==
         'ประเทศไทย' && 'dropdown--button__active'}`}
         onClick={() => setShowItems(prev => !prev)}>

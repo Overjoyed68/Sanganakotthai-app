@@ -12,13 +12,19 @@ import ProvinceAreaCompare from './ProvincialViewDetail/ProvinceAreaCompare.jsx'
 import { device } from '../size';
 
 const ProvincialLeft = () => {
-    const { province: paramProvince } = useParams();
-    const { setProvince } = useContext(MapContext);
+    const { province: paramProvince, zone: paramZone } = useParams();
+    const { setProvince, setZone } = useContext(MapContext);
 
     useEffect(() => {
+        if (!paramProvince) return;
         setProvince(paramProvince);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [paramProvince]);
+
+    useEffect(() => {
+        if (!paramZone) return;
+        setZone(paramZone)
+    }, [paramZone])
     return <ProvinceAreaCompare />;
 };
 

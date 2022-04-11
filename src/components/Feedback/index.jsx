@@ -65,12 +65,24 @@ const Feedback = () => {
                             9 เมษายน 2565
                         </div>
 
-                        <div className='feedback-question'>
-                            ธุรกิจฉันไประดับโลกได้
+                        <div className='feedbak-question-wrapper'>
+                            <select className='feedback-question'>
+                                <option className='feedback-question-options'>ธุรกิจฉันไประดับโลกได้</option>
+                                <option className='feedback-question-options'>เป็น Unicorn startup</option>
+                                <option className='feedback-question-options'>ส่งสินค้าไปต่างประเทศได้</option>
+                                <option className='feedback-question-options'>พัฒนาสินค้าให้มีประสิทธิภาพได้</option>
+                            </select>
                         </div>
 
-                        <div className='feedback-answer'>
-                            ความต้องการ
+                        <div className='feedback-answer-wrapper'>
+                            <textarea className='feedback-answer'>
+                                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                            </textarea>
+                            <div className='feedback-answer-label-wrapper'>
+                                <label>ชื่อ - นามสกุล</label>
+                                <label> | </label>
+                                <label>เบอร์โทรศัพท์</label>
+                            </div>
                         </div>
                     </div>
 
@@ -78,12 +90,24 @@ const Feedback = () => {
                         <div className='feedback-date'>
                             9 เมษายน 2565
                         </div>
-                        <div className='feedback-question'>
-                            ธุรกิจฉันไประดับโลกได้
+                        <div className='feedbak-question-wrapper'>
+                            <select className='feedback-question'>
+                                <option className='feedback-question-options'>ธุรกิจฉันไประดับโลกได้</option>
+                                <option className='feedback-question-options'>เป็น Unicorn startup</option>
+                                <option className='feedback-question-options'>ส่งสินค้าไปต่างประเทศได้</option>
+                                <option className='feedback-question-options'>พัฒนาสินค้าให้มีประสิทธิภาพได้</option>
+                            </select>
                         </div>
 
-                        <div className='feedback-answer'>
-                            ความต้องการ
+                        <div className='feedback-answer-wrapper'>
+                            <textarea className='feedback-answer'>
+                                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                            </textarea>
+                            <div className='feedback-answer-label-wrapper'>
+                                <label>ชื่อ - นามสกุล</label>
+                                <label> | </label>
+                                <label>เบอร์โทรศัพท์</label>
+                            </div>
                         </div>
                     </div>
 
@@ -92,12 +116,24 @@ const Feedback = () => {
                             9 เมษายน 2565
                         </div>
 
-                        <div className='feedback-question'>
-                            ธุรกิจฉันไประดับโลกได้
+                        <div className='feedbak-question-wrapper'>
+                            <select className='feedback-question'>
+                                <option className='feedback-question-options'>ธุรกิจฉันไประดับโลกได้</option>
+                                <option className='feedback-question-options'>เป็น Unicorn startup</option>
+                                <option className='feedback-question-options'>ส่งสินค้าไปต่างประเทศได้</option>
+                                <option className='feedback-question-options'>พัฒนาสินค้าให้มีประสิทธิภาพได้</option>
+                            </select>
                         </div>
 
-                        <div className='feedback-answer'>
-                            ความต้องการ
+                        <div className='feedback-answer-wrapper'>
+                            <textarea className='feedback-answer'>
+                                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                            </textarea>
+                            <div className='feedback-answer-label-wrapper'>
+                                <label>ชื่อ - นามสกุล</label>
+                                <label> | </label>
+                                <label>เบอร์โทรศัพท์</label>
+                            </div>
                         </div>
                     </div>
                 </div>

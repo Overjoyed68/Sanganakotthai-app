@@ -8,7 +8,7 @@ import { ProvincialLeft, ProvincialRight } from './ProvincialView';
 import TargetParty from './TargetParty';
 import TargetPartyProvincial from './TargetPartyProvincial';
 import Party from './Party';
-import Footer from './Footer';
+import TargetPartyZone from './TargetPartyZone';
 
 const Contianer = styled.div`
   position: fixed;
@@ -37,8 +37,8 @@ const MapView = () => {
         <Contianer>
             <aside className="bar bar__left">
                 <div className="bar--lower__left">
-                    <Route path="/:year?/:province?" exact component={NationalLeft} />
-                    <Route path="/:year/:province" component={ProvincialLeft} />
+                    <Route path="/:year?/:province?/:zone?" exact component={NationalLeft} />
+                    <Route path="/:year/:province?/:zone?" component={ProvincialLeft} />
                 </div>
             </aside>
 
@@ -59,9 +59,15 @@ const MapView = () => {
                         />
 
                         <Route
-                            path="/:year/:province"
+                            path="/:year/:province?"
                             exact
                             render={() => <TargetPartyProvincial selectedParty={selectedParty} />}
+                        />
+
+                        <Route
+                            path="/:year/:province/:zone"
+                            exact
+                            render={() => <TargetPartyZone selectedParty={selectedParty} />}
                         />
                     </Switch>
                 </div>
