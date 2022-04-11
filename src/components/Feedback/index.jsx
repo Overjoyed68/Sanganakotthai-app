@@ -62,7 +62,7 @@ const Feedback = () => {
 
                     <div className='feedback-box'>
                         <div className='feedback-date'>
-                            9 เมษายน 2565
+                            12 เมษายน 2565 เวลา 16:45
                         </div>
 
                         <div className='feedbak-question-wrapper'>
@@ -97,7 +97,7 @@ const Feedback = () => {
 
                     <div className='feedback-box'>
                         <div className='feedback-date'>
-                            9 เมษายน 2565
+                            11 เมษายน 2565 เวลา 09:29
                         </div>
                         <div className='feedbak-question-wrapper'>
                             <select className='feedback-question'>
@@ -129,7 +129,7 @@ const Feedback = () => {
 
                     <div className='feedback-box'>
                         <div className='feedback-date'>
-                            9 เมษายน 2565
+                            9 เมษายน 2565 เวลา 12:15
                         </div>
 
                         <div className='feedbak-question-wrapper'>
