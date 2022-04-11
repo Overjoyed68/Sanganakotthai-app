@@ -87,13 +87,13 @@ const DropdownZones = props => {
                                 className="dropdown--item"
                                 key={zone_name}
                                 onClick={() => {
-
                                     setZone(zone_name);
                                     setProvince(province_name);
+                                    console.log(zone_name)
                                     setShowItems(prev => !prev);
-                                    zone === 'เขต'
-                                        ? props.history.push(`/Sanganakotthai-app/${year}/${province_name}`)
-                                        : props.history.push(`/Sanganakotthai-app/${year}/${province_name}/${zone_name}`);
+                                    zone_name === 'เขต'
+                                        ? props.history.push(`/${year}/${province_name}`)
+                                        : props.history.push(`/${year}/${province_name}/${zone_name}`);
                                 }}
                             >
                                 {zone_name}

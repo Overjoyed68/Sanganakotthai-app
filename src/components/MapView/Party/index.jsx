@@ -82,7 +82,7 @@ const Party = props => {
                     <div>
                     </div>
                 ) : (
-                    <div className='bar--lower bar--lower__right' onClick={() => props.history.push(`/Sanganakotthai-app/feedback`)}>
+                    <div className='bar--lower bar--lower__right' onClick={() => props.history.push(`/feedback`)}>
                         <button className='feedback-btn'>Feedback ประชาชน</button>
                     </div>
                 )

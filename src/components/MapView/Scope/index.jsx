@@ -13,7 +13,7 @@ const Scope = props => {
                 <div
                     className={`year-choice--list-item ${`${province}` ===
                         'ประเทศไทย' && `${zone}` ==='เขต' && 'year-choice--list-item__active'}`}
-                    onClick={() => { props.history.push(`/Sanganakotthai-app/2562`); setProvince('ประเทศไทย'); }}>
+                    onClick={() => { props.history.push(`/2562`); setProvince('ประเทศไทย'); }}>
                     ประเทศไทย
                 </div>
 

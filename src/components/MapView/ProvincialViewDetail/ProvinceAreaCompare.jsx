@@ -135,8 +135,8 @@ const ProvinceAreaCompare = props => {
                         active={electionYear === `election-${year}`}
                         onClick={() =>
                             province === 'ประเทศไทย'
-                                ? props.history.push(`/Sanganakotthai-app/${year}`)
-                                : props.history.push(`/Sanganakotthai-app/${year}/${province}`)
+                                ? props.history.push(`/${year}`)
+                                : props.history.push(`/${year}/${province}`)
                         }
                     >
                         <svg
