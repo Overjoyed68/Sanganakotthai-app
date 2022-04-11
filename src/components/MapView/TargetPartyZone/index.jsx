@@ -4,7 +4,7 @@ import MapContext from '../../../map/context';
 import './styles.scss';
 
 const TargetPartyZone = props => {
-    const { province, electionYear, CountryTopoJson } = useContext(MapContext);
+    const { province, zone, electionYear, CountryTopoJson } = useContext(MapContext);
     const [provincialProps, setProvincialProps] = useState([]);
 
     useEffect(() => {
@@ -27,44 +27,52 @@ const TargetPartyZone = props => {
             .sort((a, b) => b.score - a.score)
             .slice(0, cur.quota)
             .forEach(person => {
-                if (!(person.party in byParty)) {
-                    byParty[person.party] = [person];
-                } else {
-                    byParty[person.party] = [...byParty[person.party], person];
+                if (person.province === province && person.zone_name === zone) {
+                    if (!(person.party in byParty)) {
+                        byParty[person.party] = [person];
+                    } else {
+                        byParty[person.party] = [...byParty[person.party], person];
+                    }
                 }
             });
     });
 
-    let byPartySorted = [];
+    let byPartySorted = {};
     for (let [party, winnerResult] of Object.entries(byParty)) {
+        const zone_name = winnerResult[0].zone_name
         const score = winnerResult.reduce((previousValue, currentValue) => Number(previousValue) + Number(currentValue.score), 0);
-        byPartySorted.push({ party, score, candidate: winnerResult.length });
+        const full_name = winnerResult[0].title + winnerResult[0].first_name + " " + winnerResult[0].last_name;
+        byPartySorted = {
+            party,
+            score,
+            zone_name,
+            full_name,
+            candidate: winnerResult.length
+        }
     }
-    byPartySorted.sort((a, b) => b.candidate - a.candidate);
 
     return (
         <div>
-            <div className='bar--lower bar--lower__right'>
+            <div className='bar--lower bar--lower__right' style={{height: '9.5rem'}}>
                 <div className='national-view'>
-                    <h1 className='national-view--text'>เขต</h1>
-                    <h1 className='national-view--text'>พรรค{byPartySorted.length > 0 && byPartySorted[0].party}</h1>
-                    <h1 className='national-view--number'>{byPartySorted.length > 0 && byPartySorted[0].candidate} </h1>
-                    <h1 className='national-view--text'>คน </h1>
+                    <h1 className='national-view--text'>เขต {byPartySorted && byPartySorted.zone_name}</h1>
+                    <h1 className='national-view--text'>พรรค{byPartySorted && byPartySorted.party}</h1>
+                    <h1 className='national-view--name'>{byPartySorted && byPartySorted.full_name} </h1>
                 </div>
             </div>
 
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view'>
                     <h1 className='national-view--text'>จำนวนเสียง</h1>
-                    <h1 className='national-view--number'>{byPartySorted.length > 0 && byPartySorted[0].score}</h1>
+                    <h1 className='national-view--number'>{byPartySorted && byPartySorted.score}</h1>
                     <h1 className='national-view--text'>คะแนน</h1>
                 </div>
             </div>
 
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view'>
-                    <h1 className='national-view--text'>เป้าหมาย</h1>
-                    <h1 className='national-view--number'>{byPartySorted.length > 0 && byPartySorted[0]["candidate"] + Math.round(byPartySorted[0]["candidate"] * 0.1)}</h1>
+                    <h1 className='national-view--text'>เป้าหมายการเลือกตั้งครั้งนี้</h1>
+                    <h1 className='national-view--number'>{byPartySorted && byPartySorted.candidate}</h1>
                     <h1 className='national-view--text'>คน</h1>
                 </div>
             </div>

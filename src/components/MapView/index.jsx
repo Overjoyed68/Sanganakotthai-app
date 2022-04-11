@@ -8,7 +8,9 @@ import { ProvincialLeft, ProvincialRight } from './ProvincialView';
 import TargetParty from './TargetParty';
 import TargetPartyProvincial from './TargetPartyProvincial';
 import Party from './Party';
+import PartyZone from './PartyZone';
 import TargetPartyZone from './TargetPartyZone';
+import PartyProvincial from './PartyProvincial';
 
 const Contianer = styled.div`
   position: fixed;
@@ -89,7 +91,25 @@ const MapView = () => {
 
             <aside className={`bar bar__right`}>
                 <div>
-                    <Party selectedParty={selectedParty} />
+                    <Switch>
+                        <Route
+                            path="/:year"
+                            exact
+                            render={() => <Party selectedParty={selectedParty} />}
+                        />
+
+                        <Route
+                            path="/:year/:province"
+                            exact
+                            render={() => <PartyProvincial selectedParty={selectedParty} />}
+                        />
+
+                        <Route
+                            path="/:year/:province/:zone"
+                            exact
+                            render={() => <PartyZone selectedParty={selectedParty} />}
+                        />
+                    </Switch>
                 </div>
             </aside>
         </Contianer>

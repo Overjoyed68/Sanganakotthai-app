@@ -7,6 +7,7 @@
     cursor: pointer;
     border-radius: calc(var(--border-radius) - 0.5rem);
     color: white;
+    height: 100%;
   }
 
   &--header {
@@ -25,6 +26,12 @@
 
   &--number {
     font-size: 2rem;
+    text-align: center;
+  }
+
+  &--name {
+    margin-top: 1.5rem;
+    font-size: 1.4rem;
     text-align: center;
   }
 

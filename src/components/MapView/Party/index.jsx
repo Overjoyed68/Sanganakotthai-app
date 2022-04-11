@@ -50,6 +50,9 @@ const Party = props => {
     byPartySorted.sort((a, b) => b.candidate - a.candidate);
     let selectedParty = byPartySorted.find(x => x.party === props.selectedParty)
 
+    let sumCandidate = 0;
+    byPartySorted.forEach((data) => { return sumCandidate += data.candidate })
+
     return (
         <div>
             <div className='bar--lower bar--lower__right'>
@@ -72,12 +75,12 @@ const Party = props => {
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view national-view--green-bg'>
                     <h1 className='national-view--text'>เป้าหมาย</h1>
-                    <h1 className='national-view--number'>{selectedParty ? selectedParty.candidate - Math.round(selectedParty.candidate * 0.1) : (byPartySorted.length > 0 && byPartySorted[0]["candidate"] - Math.round(byPartySorted[0]["candidate"] * 0.1))}</h1>
+                    <h1 className='national-view--number'>{selectedParty ? selectedParty.candidate - Math.round(selectedParty.candidate * 0.1) : (byPartySorted.length > 0 && sumCandidate)}</h1>
                     <h1 className='national-view--text'>เป้าหมาย (คน)</h1>
                 </div>
             </div>
 
-            {zone === 'เขต' ?
+            {/* {zone === 'เขต' ?
                 (
                     <div>
                     </div>
@@ -86,8 +89,7 @@ const Party = props => {
                         <button className='feedback-btn'>Feedback ประชาชน</button>
                     </div>
                 )
-            }
-
+            } */}
         </div>
     )
 }

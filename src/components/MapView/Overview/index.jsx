@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import './styles.scss';
-import partyColor from '../../../map/color';
 import MapContext from '../../../map/context';
 import partyLogo from '../../../map/logo';
 
@@ -35,7 +34,6 @@ const Overview = ({ waffleData, view }) => {
                   className="waffle--waffle__tooltipcolor"
                   style={{
                     display: 'inline-block',
-                    // backgroundColor: partyColor(electionYear)(party),
                     width: '1rem',
                     height: '1rem',
                     marginRight: '.5rem'

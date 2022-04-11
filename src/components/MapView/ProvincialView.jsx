@@ -10,6 +10,7 @@ import StackedBar from './StackedBar';
 
 import ProvinceAreaCompare from './ProvincialViewDetail/ProvinceAreaCompare.jsx';
 import { device } from '../size';
+import { Switch } from 'react-router-dom';
 
 const ProvincialLeft = () => {
     const { province: paramProvince, zone: paramZone } = useParams();
