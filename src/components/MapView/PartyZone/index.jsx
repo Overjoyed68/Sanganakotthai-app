@@ -57,9 +57,9 @@ const PartyProvincial = props => {
 
     return (
         <div>
-            <div className='bar--lower bar--lower__right' style={{height: '9.5rem'}}>
+            <div className='bar--lower bar--lower__right' style={{ height: '9.5rem' }}>
                 <div className='national-view national-view--green-bg'>
-                <h1 className='national-view--text'>เขต {byPartySorted && byPartySorted.zone_name}</h1>
+                    <h1 className='national-view--text'>เขต {byPartySorted && byPartySorted.zone_name}</h1>
                     <h1 className='national-view--text'>พรรคสร้างอนาคตไทย</h1>
                     <h1 className='national-view--name'>นายxxxxxxx yyyyyyy</h1>
                 </div>
@@ -79,6 +79,10 @@ const PartyProvincial = props => {
                     <h1 className='national-view--number'>50 / 500</h1>
                     <h1 className='national-view--text'>เป้าหมาย (คน)</h1>
                 </div>
+            </div>
+
+            <div className='bar--lower bar--lower__right' onClick={() => props.history.push(`/feedback`)}>
+                <button className='feedback-btn'>Feedback ประชาชน</button>
             </div>
         </div>
     )
