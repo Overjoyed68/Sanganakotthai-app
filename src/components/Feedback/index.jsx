@@ -78,9 +78,19 @@ const Feedback = () => {
                             <textarea className='feedback-answer' defaultValue={'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'}>
                             </textarea>
                             <div className='feedback-answer-label-wrapper'>
-                                <label>ชื่อ - นามสกุล</label>
-                                <label> | </label>
-                                <label>เบอร์โทรศัพท์</label>
+                                <span>
+                                    <label>ชื่อ - นามสกุล</label>
+                                    <label> | </label>
+                                    <label>เบอร์โทรศัพท์</label>
+                                </span>
+
+                                <div className='feedback-answer-tag tag-blue'>
+                                    ติดต่อแล้ว
+                                </div>
+
+                                <div className='feedback-answer-tag tag-green'>
+                                    แก้ปัญหาแล้ว
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -105,6 +115,14 @@ const Feedback = () => {
                                 <label>ชื่อ - นามสกุล</label>
                                 <label> | </label>
                                 <label>เบอร์โทรศัพท์</label>
+
+                                <div className='feedback-answer-tag tag-blue'>
+                                    ติดต่อแล้ว
+                                </div>
+
+                                <div className='feedback-answer-tag tag-green'>
+                                    แก้ปัญหาแล้ว
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -130,6 +148,14 @@ const Feedback = () => {
                                 <label>ชื่อ - นามสกุล</label>
                                 <label> | </label>
                                 <label>เบอร์โทรศัพท์</label>
+
+                                <div className='feedback-answer-tag tag-blue'>
+                                    ติดต่อแล้ว
+                                </div>
+
+                                <div className='feedback-answer-tag tag-green'>
+                                    แก้ปัญหาแล้ว
+                                </div>
                             </div>
                         </div>
                     </div>

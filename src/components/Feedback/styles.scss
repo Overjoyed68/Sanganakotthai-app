@@ -1,5 +1,7 @@
 .body {
     padding: 2rem;
+    display: grid;
+    grid-template-rows: auto auto;
 }
 
 .container {
@@ -69,12 +71,15 @@
     margin-top: 1rem;
     background-color: lightgray;
     height: 15rem;
+    max-height: 15rem;
 }
 
 .feedback-answer {
+    resize: none;
     font-size: 1.5rem;
     width: 100%;
-    height: 12rem;;
+    height: 11.5rem;
+    max-height: 11.5rem;;
     background-color: lightgray;
     padding: 1rem;
     border: none;
@@ -89,3 +94,24 @@
     margin: 0 1rem 0 1rem;
     padding: 0.5rem;
 }
+
+.feedback-answer-tag {
+    float: right;
+    padding: 0.2rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    margin: 0 0.5rem;
+}
+
+.tag-green {
+    background-color: var(--color-green);
+    color: var(--color-white);
+}
+
+.tag-blue {
+    background-color: var(--color-blue);
+    color: var(--color-white);
+}
+
+
+
