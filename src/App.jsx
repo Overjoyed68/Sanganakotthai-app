@@ -37,6 +37,7 @@ function App() {
           <Switch>
 
             <Redirect exact from="/" to="/2562" />
+            <Redirect exact from="/Sanganakotthai-app" to="/2562" />
 
             <Route exact path="/feedback">
               <Feedback />

@@ -17,7 +17,7 @@ const DropdownZones = props => {
     } = useComponentVisible(false);
     const searchRef = useRef(null);
     const year = electionYear.substring(electionYear.length - 4);
-    
+
     useEffect(() => {
         if (CountryTopoJson.length === 0) return;
         allZones = Array.from(
@@ -87,12 +87,13 @@ const DropdownZones = props => {
                                 className="dropdown--item"
                                 key={zone_name}
                                 onClick={() => {
+
                                     setZone(zone_name);
                                     setProvince(province_name);
                                     setShowItems(prev => !prev);
                                     zone === 'เขต'
-                                        ? props.history.push(`/${year}/${province}`)
-                                        : props.history.push(`/${year}/${province}/${zone}`);
+                                        ? props.history.push(`/${year}/${province_name}`)
+                                        : props.history.push(`/${year}/${province_name}/${zone_name}`);
                                 }}
                             >
                                 {zone_name}

@@ -75,8 +75,7 @@ const Feedback = () => {
                         </div>
 
                         <div className='feedback-answer-wrapper'>
-                            <textarea className='feedback-answer'>
-                                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                            <textarea className='feedback-answer' defaultValue={'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'}>
                             </textarea>
                             <div className='feedback-answer-label-wrapper'>
                                 <label>ชื่อ - นามสกุล</label>
@@ -100,8 +99,7 @@ const Feedback = () => {
                         </div>
 
                         <div className='feedback-answer-wrapper'>
-                            <textarea className='feedback-answer'>
-                                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                            <textarea className='feedback-answer' defaultValue={'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'}>
                             </textarea>
                             <div className='feedback-answer-label-wrapper'>
                                 <label>ชื่อ - นามสกุล</label>
@@ -126,8 +124,7 @@ const Feedback = () => {
                         </div>
 
                         <div className='feedback-answer-wrapper'>
-                            <textarea className='feedback-answer'>
-                                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                            <textarea className='feedback-answer' defaultValue={'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'}>
                             </textarea>
                             <div className='feedback-answer-label-wrapper'>
                                 <label>ชื่อ - นามสกุล</label>
