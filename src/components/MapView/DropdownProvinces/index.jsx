@@ -72,8 +72,8 @@ const DropdownProvinces = props => {
                   setProvince(province);
                   setShowItems(prev => !prev);
                   province === 'ประเทศไทย'
-                    ? props.history.push(`/${year}`)
-                    : props.history.push(`/${year}/${province}`);
+                    ? props.history.push(`/Sanganakotthai-app/${year}`)
+                    : props.history.push(`/Sanganakotthai-app/${year}/${province}`);
                 }}
               >
                 {province}

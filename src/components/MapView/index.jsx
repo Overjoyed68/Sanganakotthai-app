@@ -37,8 +37,8 @@ const MapView = () => {
         <Contianer>
             <aside className="bar bar__left">
                 <div className="bar--lower__left">
-                    <Route path="/:year?/:province?/:zone?" exact component={NationalLeft} />
-                    <Route path="/:year/:province?/:zone?" component={ProvincialLeft} />
+                    <Route path="/Sanganakotthai-app/:year?/:province?/:zone?" exact component={NationalLeft} />
+                    <Route path="/Sanganakotthai-app/:year/:province?/:zone?" component={ProvincialLeft} />
                 </div>
             </aside>
 
@@ -53,19 +53,19 @@ const MapView = () => {
                 <div>
                     <Switch>
                         <Route
-                            path="/:year?"
+                            path="/Sanganakotthai-app/:year?"
                             exact
                             render={() => <TargetParty selectedParty={selectedParty} />}
                         />
 
                         <Route
-                            path="/:year/:province?"
+                            path="/Sanganakotthai-app/:year/:province?"
                             exact
                             render={() => <TargetPartyProvincial selectedParty={selectedParty} />}
                         />
 
                         <Route
-                            path="/:year/:province/:zone"
+                            path="/Sanganakotthai-app/:year/:province/:zone"
                             exact
                             render={() => <TargetPartyZone selectedParty={selectedParty} />}
                         />
@@ -75,12 +75,12 @@ const MapView = () => {
                 <div className="bar--lower bar--lower__right">
                     <Switch>
                         <Route
-                            path="/:year?"
+                            path="/Sanganakotthai-app/:year?"
                             exact
                             render={() => <NationalRight toggleShowDetail={toggleMobileDetail} partyChanged={onPartyChanged} />}
                         />
                         <Route
-                            path="/:year/:province"
+                            path="/Sanganakotthai-app/:year/:province"
                             render={() => <ProvincialRight toggleShowDetail={toggleMobileDetail} partyChanged={onPartyChanged} />}
                         />
                     </Switch>

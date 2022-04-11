@@ -92,8 +92,8 @@ const DropdownZones = props => {
                                     setProvince(province_name);
                                     setShowItems(prev => !prev);
                                     zone === 'เขต'
-                                        ? props.history.push(`/${year}/${province_name}`)
-                                        : props.history.push(`/${year}/${province_name}/${zone_name}`);
+                                        ? props.history.push(`/Sanganakotthai-app/${year}/${province_name}`)
+                                        : props.history.push(`/Sanganakotthai-app/${year}/${province_name}/${zone_name}`);
                                 }}
                             >
                                 {zone_name}

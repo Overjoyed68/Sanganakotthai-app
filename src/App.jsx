@@ -36,14 +36,13 @@ function App() {
           <Nav />
           <Switch>
 
-            <Redirect exact from="/" to="/2562" />
-            <Redirect exact from="/Sanganakotthai-app" to="/2562" />
+            <Redirect exact from="/" to="/Sanganakotthai-app" />
 
-            <Route exact path="/feedback">
+            <Route exact path="/Sanganakotthai-app/feedback">
               <Feedback />
             </Route>
 
-            <Route path="/:year?/:province?/:zone?">
+            <Route path="/Sanganakotthai-app/:year?/:province?/:zone?">
               <main>
                 <article className="detail-layer">
                   <MapView />
@@ -52,7 +51,6 @@ function App() {
               </main>
               <Footer />
             </Route>
-
 
           </Switch>
         </BrowserRouter>

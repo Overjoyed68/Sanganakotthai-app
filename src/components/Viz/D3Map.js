@@ -371,11 +371,11 @@ function D3Map(
             .attr('d', path)
             .on('click', ({ properties: { province_name, zone_name } }) => {
                 if (previouseSelectedProvince === province_name) {
-                         push(`/${electionYear.slice(-4)}/${province_name}/${zone_name}`);
+                         push(`/Sanganakotthai-app/${electionYear.slice(-4)}/${province_name}/${zone_name}`);
                 } else {
                     province_name === province
-                        ? push(`/${electionYear.slice(-4)}`)
-                        : push(`/${electionYear.slice(-4)}/${province_name}`);
+                        ? push(`/Sanganakotthai-app/${electionYear.slice(-4)}`)
+                        : push(`/Sanganakotthai-app/${electionYear.slice(-4)}/${province_name}`);
                 }
 
                 previouseSelectedProvince = province_name;
