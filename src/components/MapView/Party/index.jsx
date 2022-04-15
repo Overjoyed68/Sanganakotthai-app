@@ -57,7 +57,7 @@ const Party = props => {
         <div>
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view national-view--green-bg'>
-                    <h1 className='national-view--text national-view--text'>{numZone} เขต {numCandidate} คน</h1>
+                    <h1 className='national-view--text national-view--text'>400 เขต 400 คน</h1>
                     <h1 className='national-view--text'>พรรคสร้างอนาคตไทย</h1>
                     <h1 className='national-view--number'>{selectedParty ? selectedParty.candidate + Math.round(selectedParty.candidate * 0.1) : (byPartySorted.length > 0 && byPartySorted[0].candidate + Math.round(byPartySorted[0].candidate * 0.1))}</h1>
                     <h1 className='national-view--text'>(โอกาส) คน</h1>

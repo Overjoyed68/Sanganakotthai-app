@@ -55,25 +55,25 @@ const TargetPartyZone = props => {
         <div>
             <div className='bar--lower bar--lower__right' style={{height: '9.5rem'}}>
                 <div className='national-view'>
-                    <h1 className='national-view--text'>เขต {byPartySorted && byPartySorted.zone_name}</h1>
-                    <h1 className='national-view--text'>พรรค{byPartySorted && byPartySorted.party}</h1>
-                    <h1 className='national-view--name'>{byPartySorted && byPartySorted.full_name} </h1>
+                    <h1 className='national-view--text national-view--text--blue'>เขต {byPartySorted && byPartySorted.zone_name}</h1>
+                    <h1 className='national-view--text national-view--text--blue'>พรรค{byPartySorted && byPartySorted.party}</h1>
+                    <h1 className='national-view--name national-view--text--blue'>{byPartySorted && byPartySorted.full_name} </h1>
                 </div>
             </div>
 
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view'>
-                    <h1 className='national-view--text'>จำนวนเสียง</h1>
-                    <h1 className='national-view--number'>{byPartySorted && byPartySorted.score}</h1>
-                    <h1 className='national-view--text'>คะแนน</h1>
+                    <h1 className='national-view--text national-view--text--blue'>จำนวนเสียง</h1>
+                    <h1 className='national-view--number national-view--text--blue'>{byPartySorted && byPartySorted.score}</h1>
+                    <h1 className='national-view--text national-view--text--blue'>คะแนน</h1>
                 </div>
             </div>
 
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view'>
-                    <h1 className='national-view--text'>เป้าหมายการเลือกตั้งครั้งนี้</h1>
-                    <h1 className='national-view--number'>{byPartySorted && byPartySorted.candidate}</h1>
-                    <h1 className='national-view--text'>คน</h1>
+                    <h1 className='national-view--text national-view--text--blue'>เป้าหมายการเลือกตั้งครั้งนี้</h1>
+                    <h1 className='national-view--number national-view--text--blue'>{byPartySorted && byPartySorted.candidate}</h1>
+                    <h1 className='national-view--text national-view--text--blue'>คน</h1>
                 </div>
             </div>
 
