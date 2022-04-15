@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Sanganakotthai-app/static/css/main.9a1a6090.css",
+    "main.css": "/Sanganakotthai-app/static/css/main.30b0dfe3.css",
     "main.js": "/Sanganakotthai-app/static/js/main.bbc77cb3.js",
     "index.html": "/Sanganakotthai-app/index.html",
-    "main.9a1a6090.css.map": "/Sanganakotthai-app/static/css/main.9a1a6090.css.map",
+    "main.30b0dfe3.css.map": "/Sanganakotthai-app/static/css/main.30b0dfe3.css.map",
     "main.bbc77cb3.js.map": "/Sanganakotthai-app/static/js/main.bbc77cb3.js.map"
   },
   "entrypoints": [
-    "static/css/main.9a1a6090.css",
+    "static/css/main.30b0dfe3.css",
     "static/js/main.bbc77cb3.js"
   ]
 }
