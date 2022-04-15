@@ -158,6 +158,7 @@ function D3Map(
                 zoomScale * -center[1] + viewport[3] - 60
             ];
 
+
             let transform = `translate(${translate[0]}, ${translate[1]}) scale(${zoomScale})`;
 
             // Zone zoom view
@@ -234,11 +235,12 @@ function D3Map(
 
             const b = path.bounds(selection);
             const zoomScale =
-                0.75 /
+                0.7 /
                 Math.max(
                     (b[1][0] - b[0][0]) / viewport[4],
                     (b[1][1] - b[0][1]) / viewport[5]
                 );
+
             const lonCenter = (b[0][0] + b[1][0]) / 2;
             const latCenter = (b[0][1] + b[1][1]) / 2;
             const center = [lonCenter, latCenter];

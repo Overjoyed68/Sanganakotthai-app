@@ -60,7 +60,7 @@ const TargetPartyProvincial = props => {
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view'>
                     <h1 className='national-view--text'>จำนวนเสียง</h1>
-                    <h1 className='national-view--number'>{selectedParty ? selectedParty.score : (byPartySorted.length > 0 && byPartySorted[0].score)}</h1>
+                    <h1 className='national-view--number'>{(selectedParty ? selectedParty.score : (byPartySorted.length > 0 && byPartySorted[0].score)).toLocaleString()}</h1>
                     <h1 className='national-view--text'>คะแนน</h1>
                 </div>
             </div>

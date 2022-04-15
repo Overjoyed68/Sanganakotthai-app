@@ -42,12 +42,15 @@ const MapView = () => {
                     <Route path="/:year?/:province?/:zone?" exact component={NationalLeft} />
                     <Route path="/:year/:province?/:zone?" component={ProvincialLeft} />
                 </div>
-            </aside>
 
-            <aside className='bar bar__left'>
-                <div className='label-box'>
-                    <h1 className='voter-label'> จำนวนผู้มีสิทธิเลือกตั้ง xxxxxxx คน</h1>
-                    <h1 className='chance-label'> โอกาสชนะ xxx/350 </h1>
+                <div className="bar--lower__left">
+                    <div className='label-box'>
+                        <h1 className='voter-label'>จำนวนผู้มีสิทธิเลือกตั้ง</h1>
+                        <h1 className='voter-label'>xxxxxx คน</h1>
+                        <hr className='horizontal-line' />
+                        <h1 className='chance-label'>โอกาสชนะ</h1>
+                        <h1 className='chance-label'>xxx/400 </h1>
+                    </div>
                 </div>
             </aside>
 

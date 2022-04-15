@@ -38,44 +38,19 @@
     flex-grow: 0;
     flex-shrink: 0;
   }
-
-  // @include tablet {
-  //   &__left {
-  //     flex-grow: 1;
-  //     padding-top: 0;
-  //     padding-left: 0;
-  //   }
-  //   &--lower__left {
-  //     display: none;
-  //   }
-
-  //   &__right {
-  //     display: flex;
-  //     padding-top: 0;
-  //     padding-right: 0;
-  //     position: fixed;
-  //     left: 1rem;
-  //     right: 1rem;
-  //     top: calc(100vh - 32rem);
-  //     transition: top 0.5s ease-out;
-
-  //     &.show-info {
-  //       top: 12rem;
-  //     }
-
-  //   }
-  // }
 }
 
 .label-box {
+  margin-top: 1.5rem;
   color: white;
-  background-color: #333;
-  padding: 1rem 0 1rem 1.5rem;
-  width: 25rem;
+  background-color: var(--color-blue);
+  padding: 2rem 0;
+  width: 20rem;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
   border-radius: calc(var(--border-radius) - 0.5rem);
-  height: 6.5rem;
+  height: 17rem;
   line-height: 2.2rem;
+  text-align: center;
 }
 
 .chance-label {
@@ -86,4 +61,8 @@
 .voter-label {
   font-weight: normal;
   font-size: 1.5rem;
+}
+
+.horizontal-line {
+  margin: 2rem;
 }

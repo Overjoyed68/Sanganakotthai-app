@@ -44,7 +44,7 @@ const TargetPartyZone = props => {
         const full_name = winnerResult[0].title + winnerResult[0].first_name + " " + winnerResult[0].last_name;
         byPartySorted = {
             party,
-            score,
+            score: score.toLocaleString(),
             zone_name,
             full_name,
             candidate: winnerResult.length

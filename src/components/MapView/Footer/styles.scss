@@ -4,7 +4,7 @@
     left: 2rem;
     bottom: 2rem;
     width: fit-content;
-    height: 18rem;
+    height: 17rem;
 }
 
 .card-container {
@@ -19,4 +19,13 @@
 
 .image {
     width: 12rem;
+}
+
+.footer-label {
+    color: var(--color-blue);
+}
+
+.footer-image-label {
+    margin-top: -0.5rem;
+    color: var(--color-blue);
 }

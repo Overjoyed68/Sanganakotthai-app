@@ -47,7 +47,6 @@ const SeeMore = styled.button`
 const CompareContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
-  margin-bottom: 2rem;
   justify-content: space-between;
 `;
 

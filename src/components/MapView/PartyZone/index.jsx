@@ -68,14 +68,14 @@ const PartyProvincial = props => {
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view national-view--green-bg'>
                     <h1 className='national-view--text'>จำนวนเสียง</h1>
-                    <h1 className='national-view--number'>{byPartySorted && byPartySorted.score + Math.round(byPartySorted.score * 0.1)}</h1>
+                    <h1 className='national-view--number'>{(byPartySorted && byPartySorted.score + Math.round(byPartySorted.score * 0.1)).toLocaleString()}</h1>
                     <h1 className='national-view--text'>(เป้าหมาย) คะแนน</h1>
                 </div>
             </div>
 
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view national-view--green-bg'>
-                    <h1 className='national-view--text'>เป้าหมาย</h1>
+                    <h1 className='national-view--text'>จำนวนที่ได้</h1>
                     <h1 className='national-view--number'>50 / 500</h1>
                     <h1 className='national-view--text'>เป้าหมาย (คน)</h1>
                 </div>
