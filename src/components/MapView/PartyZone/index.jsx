@@ -61,7 +61,7 @@ const PartyProvincial = props => {
                 <div className='national-view national-view--green-bg'>
                     <h1 className='national-view--text'>เขต {byPartySorted && byPartySorted.zone_name}</h1>
                     <h1 className='national-view--text'>พรรคสร้างอนาคตไทย</h1>
-                    <h1 className='national-view--name'>นายxxxxxxx yyyyyyy</h1>
+                    <h1 className='national-view--name'>ชื่อ นามสกุล</h1>
                 </div>
             </div>
 

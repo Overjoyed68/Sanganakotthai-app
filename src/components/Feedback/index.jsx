@@ -82,6 +82,9 @@ const Feedback = () => {
                                     <label>ชื่อ - นามสกุล</label>
                                     <label> | </label>
                                     <label>เบอร์โทรศัพท์</label>
+                                    <label> | </label>
+                                    <label> จังหวัด </label>
+                                    <label> เขต </label>
                                 </span>
 
                                 <div className='feedback-answer-tag tag-blue'>
@@ -145,10 +148,14 @@ const Feedback = () => {
                             <textarea className='feedback-answer' defaultValue={'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'}>
                             </textarea>
                             <div className='feedback-answer-label-wrapper'>
-                                <label>ชื่อ - นามสกุล</label>
+                                <label> ชื่อ - นามสกุล </label>
                                 <label> | </label>
-                                <label>เบอร์โทรศัพท์</label>
+                                <label> เบอร์โทรศัพท์ </label>
 
+                                <label> | </label>
+                                <label> เขต </label>
+                                <label> จังหวัด </label>
+                                
                                 <div className='feedback-answer-tag tag-blue'>
                                     ติดต่อแล้ว
                                 </div>

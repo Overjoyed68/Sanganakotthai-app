@@ -21,3 +21,7 @@ export function isTablet() {
 export function isLaptop() {
     return window.innerWidth <= size.laptop;
 }
+
+export function isSupportDevice() {
+    return window.innerWidth >= size.tablet;
+}
