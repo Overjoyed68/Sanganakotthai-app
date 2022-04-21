@@ -81,7 +81,7 @@ const NationalRight = ({ toggleShowDetail, partyChanged }) => {
                     <div className="national-view--content">
                         <ul className="party-list--list">
                             {byPartySorted.map(({ party, candidate }) => (
-                                <li key={party} className="party-list--list-item">
+                                <li key={party} className="party-list--list-item" onClick={() => partyChanged(party)}>
                                     <span
                                         className="party-list--party-box"
                                         style={{
@@ -90,7 +90,7 @@ const NationalRight = ({ toggleShowDetail, partyChanged }) => {
                                             backgroundSize: '1.5rem'
                                         }}
                                     ></span>
-                                    <a style={{ verticalAlign: 'super' }} onClick={() => partyChanged(party)}>พรรค{party}</a>
+                                    <a style={{ verticalAlign: 'super' }} >พรรค{party}</a>
                                     {' '}
                                     <span className="party-list--count">
                                         {' '}
