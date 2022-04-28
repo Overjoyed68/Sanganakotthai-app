@@ -84,7 +84,7 @@ const Map = props => {
     const tooltipZoneRef = useRef();
     const { province, zone, electionYear, CountryTopoJson } = useContext(MapContext);
     const [tooltips, setTooltips] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const {loading, setLoading} = useContext(MapContext);
     const [tooltipsStyles, setTooltipStyles] = useState({
         width: 0,
         left: null,
@@ -160,7 +160,7 @@ const Map = props => {
                 <ZoneDetailText ref={tooltipZoneRef}>{tooltips[1]}</ZoneDetailText>
             </div>
             <Loader>
-                <BeatLoader size={25} color={'white'} loading={loading} />
+                <BeatLoader size={25} color={'#00AA4E'} loading={loading} />
             </Loader>
             <svg width={w} height={h}>
                 <g id="vis" ref={visRef}>

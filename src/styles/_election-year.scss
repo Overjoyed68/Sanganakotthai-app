@@ -5,33 +5,21 @@
     display: flex;
     flex-flow: row wrap;
     width: 100%;
-    // margin-bottom: 23px;
   }
 
   &--list-item {
     font-size: 2rem;
     font-weight: bold;
 
-    width: 20rem;
+    width: 22rem;
     height: 65px;
-    // margin-top: 15px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    // border: 2px solid var(--color-black);
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
     border-radius: calc(var(--border-radius) - 0.5rem);
     background-color: var(--color-white);
     cursor: pointer;
-
-    &:nth-child(odd) {
-      // margin-right: 10px;
-    }
-
-    &:hover {
-      color: black;
-      // background-color: var(--color-white);
-    }
 
     &__active {
       background-color: var(--color-green);

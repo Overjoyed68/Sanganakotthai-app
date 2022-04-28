@@ -6,7 +6,7 @@
 
 .container {
     display: grid;
-    grid-template-columns: 20% auto;
+    grid-template-columns: 25% auto;
     grid-template-rows: 3rem auto;
     column-gap: 5rem;
     row-gap: 2rem;
@@ -23,7 +23,13 @@
 
 .demand-container {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: auto;
+    row-gap: 2rem;
+}
+
+.demand-row{
+    display: grid;
+    grid-template-columns: 40% 60%;
     row-gap: 2rem;
 }
 
@@ -61,6 +67,13 @@
     background-color: lightgray;
     padding: 1rem;
     border: none;
+}
+
+.feedback-question-label {
+    margin-top: 1rem;
+    background-color: lightgray;
+    padding: 1rem;
+    font-size: 1.5rem;     
 }
 
 .feedback-question-options {

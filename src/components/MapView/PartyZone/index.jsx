@@ -5,7 +5,7 @@ import MapContext from '../../../map/context';
 import './styles.scss';
 
 const PartyProvincial = props => {
-    const { province, setProvince, CountryTopoJson, electionYear, zone } = useContext(MapContext);
+    const { province, CountryTopoJson, electionYear, zone, zoneData } = useContext(MapContext);
     const [nationalProps, setNationalProps] = useState([]);
 
     useEffect(() => {
@@ -59,16 +59,16 @@ const PartyProvincial = props => {
         <div>
             <div className='bar--lower bar--lower__right' style={{ height: '9.5rem' }}>
                 <div className='national-view national-view--green-bg'>
-                    <h1 className='national-view--text'>เขต {byPartySorted && byPartySorted.zone_name}</h1>
+                    <h1 className='national-view--text'>จังหวัด { zoneData.province } { zoneData.electorate }</h1>
                     <h1 className='national-view--text'>พรรคสร้างอนาคตไทย</h1>
-                    <h1 className='national-view--name'>ชื่อ นามสกุล</h1>
+                    <h1 className='national-view--name'>คุณ { zoneData.member_name }</h1>
                 </div>
             </div>
 
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view national-view--green-bg'>
                     <h1 className='national-view--text'>จำนวนเสียง</h1>
-                    <h1 className='national-view--number'>{(byPartySorted && byPartySorted.score + Math.round(byPartySorted.score * 0.1)).toLocaleString()}</h1>
+                    <h1 className='national-view--number'>{ zoneData.total_goals_points }</h1>
                     <h1 className='national-view--text'>(เป้าหมาย) คะแนน</h1>
                 </div>
             </div>
@@ -76,8 +76,8 @@ const PartyProvincial = props => {
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view national-view--green-bg'>
                     <h1 className='national-view--text'>จำนวนที่ได้</h1>
-                    <h1 className='national-view--number'>50 / 500</h1>
-                    <h1 className='national-view--text'>เป้าหมาย (คน)</h1>
+                    <h1 className='national-view--number'>{ zoneData.total_amount } / { zoneData.total_goals_member }</h1>
+                    <h1 className='national-view--text'>(เป้าหมาย) คน</h1>
                 </div>
             </div>
 

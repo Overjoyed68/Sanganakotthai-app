@@ -2,11 +2,12 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import MapContext from '../../../map/context';
 import './styles.scss';
+import { API_URL } from '../../../config';
 
 let allProvinces = [];
 
 const DropdownProvinces = props => {
-  const { electionYear, province, setProvince, CountryTopoJson } = useContext(MapContext);
+  const { electionYear, province, setProvince, CountryTopoJson, setProvinceData } = useContext(MapContext);
   const [filter, setFilter] = useState('');
   const [dropdownProvinces, setDropdownProvinces] = useState([]);
   const {
@@ -16,6 +17,8 @@ const DropdownProvinces = props => {
   } = useComponentVisible(false);
   const searchRef = useRef(null);
   const year = electionYear.substring(electionYear.length - 4);
+  const { setLoading } = useContext(MapContext);
+  const { setNumberOfVoter } = useContext(MapContext)
 
   useEffect(() => {
     if (CountryTopoJson.length === 0) return;
@@ -43,11 +46,38 @@ const DropdownProvinces = props => {
     if (showItems) searchRef.current.focus();
   }, [showItems]);
 
+  const getNumberOfVoter = (province) => {
+    let selectedProvinceData = 0;
+    if (province === 'ประเทศไทย') {
+      setNumberOfVoter(51214120);
+    } else {
+      selectedProvinceData = CountryTopoJson.objects[electionYear].geometries.find(data => data.properties.province_name === province);
+      setNumberOfVoter(selectedProvinceData.properties.number_of_vote_per_province);
+    }
+  }
+
+  const onProvinceChanged = (province) => {
+    setLoading(true);
+    setProvince(province);
+    getNumberOfVoter(province);
+    province === 'ประเทศไทย'
+      ? props.history.push(`/${year}`)
+      : props.history.push(`/${year}/${province}`);
+    fetch(API_URL.PROD_URL + '/dashboard/' + province + '/0')
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          setProvinceData(data.data);
+        }
+      })
+      .finally(setLoading(false));
+  }
+
   return (
     <div className="dropdown--container" ref={ref}>
       <div
         className={`dropdown--button ${`${province}` !==
-        'ประเทศไทย' && 'dropdown--button__active'}`}
+          'ประเทศไทย' && 'dropdown--button__active'}`}
         onClick={() => setShowItems(prev => !prev)}>
         {props.children === 'ประเทศไทย' ? 'จังหวัด' : props.children}
         <i className="dropdown--chevron"></i>
@@ -69,11 +99,8 @@ const DropdownProvinces = props => {
                 className="dropdown--item"
                 key={province}
                 onClick={() => {
-                  setProvince(province);
                   setShowItems(prev => !prev);
-                  province === 'ประเทศไทย'
-                    ? props.history.push(`/${year}`)
-                    : props.history.push(`/${year}/${province}`);
+                  onProvinceChanged(province)
                 }}
               >
                 {province}

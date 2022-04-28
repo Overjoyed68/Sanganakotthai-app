@@ -21,6 +21,39 @@ function App() {
   const [zone, setZone] = useState('เขต')
   const [CountryTopoJson] = useFetch();
 
+  const [loading, setLoading] = useState(false);
+
+  const initialCountryData = {
+    total_chance_of_won: 0,
+    total_electoral_district: 0,
+    total_goals_member: 0,
+    total_goals_points: 0,
+    total_member: 0
+  };
+
+  const initialProvinceData = {
+    total_electoral_district: 0,
+    total_member: 0,
+    total_chance_of_won: 0,
+    total_goals_points: 0,
+    total_goals_member: 0
+  };
+
+  const initialZoneData = {
+    member_name: '',
+    province: '',
+    electorate: '',
+    total_goals_points: 0,
+    total_amount: 0,
+    total_goals_member: 0
+  };
+
+  const [countryData, setCountryData] = useState(initialCountryData);
+  const [provinceData, setProvinceData] = useState(initialProvinceData);
+  const [zoneData, setZoneData] = useState(initialZoneData);
+
+  const [numberOfVoter, setNumberOfVoter] = useState(0)
+
   return (
     <div>
 
@@ -33,7 +66,17 @@ function App() {
             setProvince,
             zone,
             setZone,
-            CountryTopoJson
+            CountryTopoJson,
+            countryData, 
+            setCountryData,
+            provinceData,
+            setProvinceData,
+            zoneData,
+            setZoneData,
+            loading,
+            setLoading,
+            numberOfVoter,
+            setNumberOfVoter
           }}>
           <BrowserRouter>
             <Nav />

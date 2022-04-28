@@ -5,7 +5,7 @@ import MapContext from '../../../map/context';
 import './styles.scss';
 
 const PartyProvincial = props => {
-    const { province, setProvince, CountryTopoJson, electionYear, zone } = useContext(MapContext);
+    const { province, CountryTopoJson, electionYear, provinceData } = useContext(MapContext);
     const [nationalProps, setNationalProps] = useState([]);
 
     useEffect(() => {
@@ -15,11 +15,6 @@ const PartyProvincial = props => {
         );
         setNationalProps(nationalProps);
     }, [CountryTopoJson, electionYear]);
-
-    const numZone = nationalProps.length;
-    const numCandidate = nationalProps.reduce((acc, cur) => {
-        return acc + cur.quota;
-    }, 0);
 
     let byParty = {};
     nationalProps.map(cur => {
@@ -47,8 +42,6 @@ const PartyProvincial = props => {
         byPartySorted.push({ party, score, candidate: winnerResult.length });
     }
     byPartySorted.sort((a, b) => b.candidate - a.candidate);
-    let selectedParty = byPartySorted.find(x => x.party === props.selectedParty)
-
     let sumCandidate = 0;
     byPartySorted.forEach((data) => { return sumCandidate += data.candidate })
 
@@ -56,9 +49,9 @@ const PartyProvincial = props => {
         <div>
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view national-view--green-bg'>
-                    <h1 className='national-view--text national-view--text'>400 เขต 400 คน</h1>
+                    <h1 className='national-view--text national-view--text'>{ provinceData.total_electoral_district } เขต { provinceData.total_member } คน</h1>
                     <h1 className='national-view--text'>พรรคสร้างอนาคตไทย</h1>
-                    <h1 className='national-view--number'>{selectedParty ? selectedParty.candidate + Math.round(selectedParty.candidate * 0.1) : (byPartySorted.length > 0 && byPartySorted[0].candidate + Math.round(byPartySorted[0].candidate * 0.1))}</h1>
+                    <h1 className='national-view--number'>{ provinceData.total_chance_of_won }</h1>
                     <h1 className='national-view--text'>(โอกาส) คน</h1>
                 </div>
             </div>
@@ -66,7 +59,7 @@ const PartyProvincial = props => {
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view national-view--green-bg'>
                     <h1 className='national-view--text'>จำนวนเสียง</h1>
-                    <h1 className='national-view--number'>{(selectedParty ? selectedParty.score + Math.round(selectedParty.score * 0.1) : (byPartySorted.length > 0 && byPartySorted[0].score + Math.round(byPartySorted[0].score * 0.1))).toLocaleString()}</h1>
+                    <h1 className='national-view--number'>{ provinceData.total_goals_points }</h1>
                     <h1 className='national-view--text'>(เป้าหมาย) คะแนน</h1>
                 </div>
             </div>
@@ -74,8 +67,8 @@ const PartyProvincial = props => {
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view national-view--green-bg'>
                     <h1 className='national-view--text'>จำนวนที่ได้</h1>
-                    <h1 className='national-view--number'>{selectedParty ? selectedParty.candidate - Math.round(selectedParty.candidate * 0.2) : (byPartySorted.length > 0 && sumCandidate)}</h1>
-                    <h1 className='national-view--text'>เป้าหมาย (คน)</h1>
+                    <h1 className='national-view--number'>{ provinceData.total_goals_member }</h1>
+                    <h1 className='national-view--text'>(เป้าหมาย) คน</h1>
                 </div>
             </div>
         </div>

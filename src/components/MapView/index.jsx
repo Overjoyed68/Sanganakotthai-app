@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -11,6 +11,7 @@ import Party from './Party';
 import PartyZone from './PartyZone';
 import TargetPartyZone from './TargetPartyZone';
 import PartyProvincial from './PartyProvincial';
+import MapContext from '../../map/context';
 
 const Contianer = styled.div`
   position: fixed;
@@ -24,6 +25,7 @@ const Contianer = styled.div`
 
 const MapView = () => {
     const [showMobileDetail, setShowMobileDetail] = useState(false);
+    const { numberOfVoter } = useContext(MapContext)
 
     function toggleMobileDetail() {
         setShowMobileDetail(!showMobileDetail);
@@ -46,10 +48,7 @@ const MapView = () => {
                 <div className="bar--lower__left">
                     <div className='label-box'>
                         <h1 className='voter-label'>จำนวนผู้มีสิทธิเลือกตั้ง</h1>
-                        <h1 className='voter-label voter-label-number'>xxx,xxx คน</h1>
-                        {/* <hr className='horizontal-line' />
-                        <h1 className='chance-label'>โอกาสชนะ</h1>
-                        <h1 className='chance-label chance-label-number '>xxx/400 </h1> */}
+                        <h1 className='voter-label voter-label-number'>{numberOfVoter.toLocaleString()} คน</h1>
                     </div>
                 </div>
             </aside>

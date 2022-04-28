@@ -73,7 +73,7 @@ const TargetParty = props => {
             <div className='bar--lower bar--lower__right'>
                 <div className='national-view'>
                     <h1 className='national-view--text national-view--text--blue'>จำนวนที่ได้</h1>
-                    <h1 className='national-view--number national-view--text--blue'>{selectedParty ? selectedParty.candidate + Math.round(selectedParty.candidate * 0.1) : (byPartySorted.length > 0 && byPartySorted[0]["candidate"] + Math.round(byPartySorted[0]["candidate"] * 0.1))}</h1>
+                    <h1 className='national-view--number national-view--text--blue'>{selectedParty ? selectedParty.candidate  : (byPartySorted.length > 0 && byPartySorted[0]["candidate"])}</h1>
                     <h1 className='national-view--text national-view--text--blue'>คน</h1>
                 </div>
             </div>

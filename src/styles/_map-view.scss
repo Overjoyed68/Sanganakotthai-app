@@ -26,7 +26,7 @@
   &__left {
     padding-top: 2rem;
     padding-left: 2rem;
-    flex-basis: 20rem;
+    flex-basis: 2rem;
     flex-grow: 0;
     flex-shrink: 0;
   }
@@ -45,7 +45,7 @@
   color: white;
   background-color: var(--color-blue);
   padding: 1.5rem 0;
-  width: 20rem;
+  width: 22rem;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
   border-radius: calc(var(--border-radius) - 0.5rem);
   height: 7rem;

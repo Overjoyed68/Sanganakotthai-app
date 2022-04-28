@@ -2,12 +2,13 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import MapContext from '../../../map/context';
 import './styles.scss';
+import { API_URL } from '../../../config';
 
 let allZones = [];
 let zoneList = [];
 
 const DropdownZones = props => {
-    const { electionYear, CountryTopoJson, setZone, zone, setProvince, province } = useContext(MapContext);
+    const { electionYear, CountryTopoJson, setZone, zone, setProvince, province, setZoneData } = useContext(MapContext);
     const [filter, setFilter] = useState('');
     const [dropdownZones, setDropdownZones] = useState([]);
     const {
@@ -17,6 +18,8 @@ const DropdownZones = props => {
     } = useComponentVisible(false);
     const searchRef = useRef(null);
     const year = electionYear.substring(electionYear.length - 4);
+    const { setLoading } = useContext(MapContext);
+    const { setNumberOfVoter } = useContext(MapContext)
 
     useEffect(() => {
         if (CountryTopoJson.length === 0) return;
@@ -61,6 +64,30 @@ const DropdownZones = props => {
         setDropdownZones(allZones);
     }, [props.province])
 
+    const getNumberOfVoter = (province_name, zone_id) => {
+        const selectedProvinceData = CountryTopoJson.objects[electionYear].geometries.find(data => data.properties.province_name === province_name && data.properties.zone_id === zone_id);
+        setNumberOfVoter(selectedProvinceData.properties.number_of_vote_per_zone);
+      }
+
+    const onZoneChanged = (province_name, zone_name, zone_id) => {
+        setLoading(true);
+        setZone(zone_name);
+        getNumberOfVoter(province_name, zone_id)
+        setProvince(province_name);
+        zone_name === 'เขต'
+            ? props.history.push(`/${year}/${province_name}`)
+            : props.history.push(`/${year}/${province_name}/${zone_name}`);
+
+        fetch(API_URL.PROD_URL + '/dashboard/' + province_name + '/' + zone_id)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    setZoneData(data.data);
+                }
+            })
+            .finally(setLoading(false));
+    }
+
     return (
         <div className="dropdown--container" ref={ref}>
             <div
@@ -82,18 +109,13 @@ const DropdownZones = props => {
                                 ref={searchRef}
                             />
                         </div>
-                        {dropdownZones.map(({ zone_name, province_name }) => (
+                        {dropdownZones.map(({ province_name, zone_name, zone_id }) => (
                             <div
                                 className="dropdown--item"
                                 key={zone_name}
                                 onClick={() => {
-                                    setZone(zone_name);
-                                    setProvince(province_name);
-                                    console.log(zone_name)
                                     setShowItems(prev => !prev);
-                                    zone_name === 'เขต'
-                                        ? props.history.push(`/${year}/${province_name}`)
-                                        : props.history.push(`/${year}/${province_name}/${zone_name}`);
+                                    onZoneChanged(province_name, zone_name, zone_id)
                                 }}
                             >
                                 {zone_name}
