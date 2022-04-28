@@ -14,19 +14,33 @@ import { Switch } from 'react-router-dom';
 
 const ProvincialLeft = () => {
     const { province: paramProvince, zone: paramZone } = useParams();
-    const { setProvince, setZone } = useContext(MapContext);
+    const { setProvince, setZone, setNumberOfVoter, CountryTopoJson } = useContext(MapContext);
 
     useEffect(() => {
         if (!paramProvince) return;
         setProvince(paramProvince);
+        getNumberOfVoterPerProvince(paramProvince);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [paramProvince]);
 
     useEffect(() => {
         if (!paramZone) return;
-        setZone(paramZone)
+        setZone(paramZone);
+        getNumberOfVoterPerZone(paramProvince, paramZone)
     }, [paramZone])
     return <ProvinceAreaCompare />;
+
+    function getNumberOfVoterPerProvince(province_name) {
+        const provinceData = CountryTopoJson.objects['election-2562'].geometries.find(data => data.properties.province_name === province_name);
+        const numberOfVoter = provinceData.properties.number_of_vote_per_province || 0;
+        setNumberOfVoter(numberOfVoter);
+    }
+    
+    function getNumberOfVoterPerZone(province_name, zone_name) {
+        const provinceData = CountryTopoJson.objects['election-2562'].geometries.find(data => data.properties.province_name === province_name && data.properties.zone_name === zone_name);
+        const numberOfVoter = provinceData.properties.number_of_vote_per_zone || 0;
+        setNumberOfVoter(numberOfVoter);
+    }
 };
 
 const ToggleButton = styled.a`

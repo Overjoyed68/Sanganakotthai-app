@@ -18,7 +18,7 @@ const DropdownProvinces = props => {
   const searchRef = useRef(null);
   const year = electionYear.substring(electionYear.length - 4);
   const { setLoading } = useContext(MapContext);
-  const { setNumberOfVoter } = useContext(MapContext)
+  const { setNumberOfVoter, numberOfVoter } = useContext(MapContext)
 
   useEffect(() => {
     if (CountryTopoJson.length === 0) return;

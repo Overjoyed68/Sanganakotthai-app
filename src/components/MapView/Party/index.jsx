@@ -20,12 +20,6 @@ const Party = props => {
         setNationalProps(nationalProps);
     }, [CountryTopoJson, electionYear]);
 
-    // useEffect(() => {
-    //     if(countryData) {
-    //         console.log(countryData);
-    //     }
-    // }, [countryData])
-
     let byParty = {};
     nationalProps.map(cur => {
         if (!cur.result) {

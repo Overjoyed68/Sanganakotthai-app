@@ -82,7 +82,7 @@ const Map = props => {
     const [h, setH] = useState(window.innerHeight - sitenavHeight);
     const visRef = useRef();
     const tooltipZoneRef = useRef();
-    const { province, zone, electionYear, CountryTopoJson } = useContext(MapContext);
+    const { province, zone, electionYear, CountryTopoJson, numberOfVoter } = useContext(MapContext);
     const [tooltips, setTooltips] = useState([]);
     const {loading, setLoading} = useContext(MapContext);
     const [tooltipsStyles, setTooltipStyles] = useState({
@@ -104,6 +104,7 @@ const Map = props => {
             electionYear,
             province,
             zone,
+            numberOfVoter,
             isTablet() ? 1500 : 2250,
             setTooltips
         );

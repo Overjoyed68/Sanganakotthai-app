@@ -13,6 +13,7 @@ function D3Map(
     initElectionYear,
     initProvince,
     initZone,
+    initNumberOfVoter,
     initScale,
     setTooltips
 ) {
@@ -27,7 +28,8 @@ function D3Map(
         $border_zone,
         electionYear = initElectionYear,
         province = initProvince,
-        zone = initZone;
+        zone = initZone,
+        numberOfVoter = initNumberOfVoter;
     const SCALE = initScale;
     let previouseSelectedProvince = 'ประเทศไทย';
 
@@ -67,6 +69,7 @@ function D3Map(
         labelJoin(false);
         setProvince(province);
         setZone(zone);
+        setNumberOfVoter(numberOfVoter);
     };
 
     const setElectionYear = year => {
@@ -130,10 +133,10 @@ function D3Map(
 
         $zone
             .transition()
-            .delay(1000)
-            .attr('fill', fillSolid);
+            .attr('fill', fillSolidZone);
 
         if (province !== 'ประเทศไทย' && zone !== 'เขต') {
+
             const selection = {
                 type: 'FeatureCollection',
                 features: topojson
@@ -169,12 +172,16 @@ function D3Map(
                 .on('end', () => {
                     $zone.attr(
                         'fill',
-                        fillFactory($defs, 'normal')(electionYear)(province)
+                        // fillFactory($defs, 'normal')(electionYear)(province)
                     ); // post map-panning
                     updatePatternTransform.call($vis.node(), 'zoom');
                     labelJoin();
                 });
         }
+    }
+
+    const setNumberOfVoter = voter => {
+        numberOfVoter = voter;
     }
 
     const setProvince = newProvince => {
@@ -183,7 +190,7 @@ function D3Map(
 
         $zone
             .transition()
-            .delay(500)
+            .delay(1000)
             .attr('fill', fillSolid); // pre map-panning
 
         if (province !== 'ประเทศไทย') {
@@ -335,6 +342,19 @@ function D3Map(
             : 'gainsboro';
     }
 
+    function fillSolidZone({ properties }) {
+        const { result, zone_name } = properties;
+        if (!result) return 'white';
+        const winner = result.reduce(function (prev, current) {
+            return prev.score > current.score ? prev : current;
+        });
+
+        const fillColor = partyColor(electionYear)(winner.party);
+        return (zone_name === zone)
+            ? fillColor || 'purple' // = color not found
+            : 'gainsboro';
+    }
+
     function setTooltipContent({ properties }) {
         if (province !== properties.province_name) {
             setTooltips([properties.province_name]);
@@ -373,11 +393,13 @@ function D3Map(
             .attr('d', path)
             .on('click', ({ properties: { province_name, zone_name } }) => {
                 if (previouseSelectedProvince === province_name) {
-                         push(`/${electionYear.slice(-4)}/${province_name}/${zone_name}`);
+                    push(`/${electionYear.slice(-4)}/${province_name}/${zone_name}`);
                 } else {
-                    province_name === province
-                        ? push(`/${electionYear.slice(-4)}`)
-                        : push(`/${electionYear.slice(-4)}/${province_name}`);
+                    if (province_name === province) {
+                        push(`/${electionYear.slice(-4)}`)
+                    } else {
+                        push(`/${electionYear.slice(-4)}/${province_name}`);
+                    }
                 }
 
                 previouseSelectedProvince = province_name;
@@ -542,7 +564,7 @@ function D3Map(
         $border_zone.call(updateBorderZone);
     };
 
-    return { render, setVis, setElectionYear, setProvince, setZone, setViewport };
+    return { render, setVis, setElectionYear, setProvince, setZone, setViewport, setNumberOfVoter };
 }
 
 function fillFactory($defs, isTablet, uid = '') {

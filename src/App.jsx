@@ -12,7 +12,7 @@ import Footer from "./components/MapView/Footer";
 import Feedback from './components/Feedback';
 import { Redirect } from "react-router-dom";
 
-import { isSupportDevice, isTablet, size } from './components/size'
+import { isSupportDevice } from './components/size'
 
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
   const [electionYear, setElectionYear] = useState('election-2562');
   const [zone, setZone] = useState('เขต')
   const [CountryTopoJson] = useFetch();
-
+  const [numberOfVoter, setNumberOfVoter] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const initialCountryData = {
@@ -51,8 +51,6 @@ function App() {
   const [countryData, setCountryData] = useState(initialCountryData);
   const [provinceData, setProvinceData] = useState(initialProvinceData);
   const [zoneData, setZoneData] = useState(initialZoneData);
-
-  const [numberOfVoter, setNumberOfVoter] = useState(0)
 
   return (
     <div>
