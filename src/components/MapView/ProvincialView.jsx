@@ -6,19 +6,20 @@ import { useParams } from 'react-router-dom';
 import MapContext from '../../map/context';
 import Overview from './Overview';
 import PartyList from './PartyList';
-import StackedBar from './StackedBar';
 
 import ProvinceAreaCompare from './ProvincialViewDetail/ProvinceAreaCompare.jsx';
 import { device } from '../size';
-import { Switch } from 'react-router-dom';
+import { API_URL } from '../../config';
+
 
 const ProvincialLeft = () => {
     const { province: paramProvince, zone: paramZone } = useParams();
-    const { setProvince, setZone, setNumberOfVoter, CountryTopoJson } = useContext(MapContext);
+    const { setProvince, setZone, setNumberOfVoter, CountryTopoJson, setLoading, setProvinceData, setZoneData } = useContext(MapContext);
 
     useEffect(() => {
         if (!paramProvince) return;
         setProvince(paramProvince);
+        getProvinceDataByAPI(paramProvince);
         getNumberOfVoterPerProvince(paramProvince);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [paramProvince]);
@@ -26,20 +27,62 @@ const ProvincialLeft = () => {
     useEffect(() => {
         if (!paramZone) return;
         setZone(paramZone);
+        getZoneDataByAPI(paramProvince, paramZone);
         getNumberOfVoterPerZone(paramProvince, paramZone)
     }, [paramZone])
     return <ProvinceAreaCompare />;
 
     function getNumberOfVoterPerProvince(province_name) {
-        const provinceData = CountryTopoJson.objects['election-2562'].geometries.find(data => data.properties.province_name === province_name);
-        const numberOfVoter = provinceData.properties.number_of_vote_per_province || 0;
+        const data = getProvinceData(province_name);
+        const numberOfVoter = data.properties.number_of_vote_per_province || 0;
         setNumberOfVoter(numberOfVoter);
     }
-    
+
     function getNumberOfVoterPerZone(province_name, zone_name) {
-        const provinceData = CountryTopoJson.objects['election-2562'].geometries.find(data => data.properties.province_name === province_name && data.properties.zone_name === zone_name);
-        const numberOfVoter = provinceData.properties.number_of_vote_per_zone || 0;
+        const data = getZoneData(province_name, zone_name);
+        const numberOfVoter = data.properties.number_of_vote_per_zone || 0;
         setNumberOfVoter(numberOfVoter);
+    }
+
+    function getProvinceDataByAPI(province_name) {
+        setLoading(true);
+        fetch(API_URL.PROD_URL + '/dashboard/' + province_name + '/0')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    setProvinceData(data.data);
+                }
+            })
+            .finally(setLoading(false));
+    }
+
+    function getZoneDataByAPI(province_name, zone_name) {
+        const zone_id = getZoneId(province_name, zone_name);
+        setLoading(true);
+        fetch(API_URL.PROD_URL + '/dashboard/' + province_name + '/' + zone_id)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    setZoneData(data.data);
+                }
+            })
+            .finally(setLoading(false));
+    }
+
+    function getZoneId(province_name, zone_name) {
+        const data = getZoneData(province_name, zone_name);
+        const zone_id = data.properties.zone_id;
+        return zone_id;
+    }
+
+    function getProvinceData(province_name) {
+        const provinceData = CountryTopoJson.objects['election-2562'].geometries.find(data => data.properties.province_name === province_name);
+        return provinceData;
+    }
+
+    function getZoneData(province_name, zone_name) {
+        const zoneData = CountryTopoJson.objects['election-2562'].geometries.find(data => data.properties.province_name === province_name && data.properties.zone_name === zone_name);
+        return zoneData;
     }
 };
 

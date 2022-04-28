@@ -64,28 +64,12 @@ const DropdownZones = props => {
         setDropdownZones(allZones);
     }, [props.province])
 
-    const getNumberOfVoter = (province_name, zone_id) => {
-        const selectedProvinceData = CountryTopoJson.objects[electionYear].geometries.find(data => data.properties.province_name === province_name && data.properties.zone_id === zone_id);
-        setNumberOfVoter(selectedProvinceData.properties.number_of_vote_per_zone);
-      }
-
     const onZoneChanged = (province_name, zone_name, zone_id) => {
-        setLoading(true);
         setZone(zone_name);
-        getNumberOfVoter(province_name, zone_id)
         setProvince(province_name);
         zone_name === 'เขต'
             ? props.history.push(`/${year}/${province_name}`)
             : props.history.push(`/${year}/${province_name}/${zone_name}`);
-
-        fetch(API_URL.PROD_URL + '/dashboard/' + province_name + '/' + zone_id)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    setZoneData(data.data);
-                }
-            })
-            .finally(setLoading(false));
     }
 
     return (

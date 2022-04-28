@@ -175,7 +175,7 @@ function D3Map(
                         // fillFactory($defs, 'normal')(electionYear)(province)
                     ); // post map-panning
                     updatePatternTransform.call($vis.node(), 'zoom');
-                    labelJoin();
+                    // labelJoin();
                 });
         }
     }

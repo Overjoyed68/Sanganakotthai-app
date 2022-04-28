@@ -46,31 +46,14 @@ const DropdownProvinces = props => {
     if (showItems) searchRef.current.focus();
   }, [showItems]);
 
-  const getNumberOfVoter = (province) => {
-    let selectedProvinceData = 0;
+  const onProvinceChanged = (province) => {
+    setProvince(province);
     if (province === 'ประเทศไทย') {
       setNumberOfVoter(51214120);
+      props.history.push(`/${year}`)
     } else {
-      selectedProvinceData = CountryTopoJson.objects[electionYear].geometries.find(data => data.properties.province_name === province);
-      setNumberOfVoter(selectedProvinceData.properties.number_of_vote_per_province);
+      props.history.push(`/${year}/${province}`);
     }
-  }
-
-  const onProvinceChanged = (province) => {
-    setLoading(true);
-    setProvince(province);
-    getNumberOfVoter(province);
-    province === 'ประเทศไทย'
-      ? props.history.push(`/${year}`)
-      : props.history.push(`/${year}/${province}`);
-    fetch(API_URL.PROD_URL + '/dashboard/' + province + '/0')
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          setProvinceData(data.data);
-        }
-      })
-      .finally(setLoading(false));
   }
 
   return (
