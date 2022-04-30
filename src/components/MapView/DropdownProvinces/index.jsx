@@ -2,12 +2,11 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import MapContext from '../../../map/context';
 import './styles.scss';
-import { API_URL } from '../../../config';
 
 let allProvinces = [];
 
 const DropdownProvinces = props => {
-  const { electionYear, province, setProvince, CountryTopoJson, setProvinceData } = useContext(MapContext);
+  const { electionYear, province, setProvince, CountryTopoJson } = useContext(MapContext);
   const [filter, setFilter] = useState('');
   const [dropdownProvinces, setDropdownProvinces] = useState([]);
   const {
@@ -17,8 +16,7 @@ const DropdownProvinces = props => {
   } = useComponentVisible(false);
   const searchRef = useRef(null);
   const year = electionYear.substring(electionYear.length - 4);
-  const { setLoading } = useContext(MapContext);
-  const { setNumberOfVoter, numberOfVoter } = useContext(MapContext)
+  const { setNumberOfVoter } = useContext(MapContext)
 
   useEffect(() => {
     if (CountryTopoJson.length === 0) return;

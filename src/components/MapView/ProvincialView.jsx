@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import * as d3 from 'd3';
 import styled from 'styled-components';
 
 import { useParams } from 'react-router-dom';
@@ -16,21 +15,7 @@ const ProvincialLeft = () => {
     const { province: paramProvince, zone: paramZone } = useParams();
     const { setProvince, setZone, setNumberOfVoter, CountryTopoJson, setLoading, setProvinceData, setZoneData } = useContext(MapContext);
 
-    useEffect(() => {
-        if (!paramProvince) return;
-        setProvince(paramProvince);
-        getProvinceDataByAPI(paramProvince);
-        getNumberOfVoterPerProvince(paramProvince);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [paramProvince]);
 
-    useEffect(() => {
-        if (!paramZone) return;
-        setZone(paramZone);
-        getZoneDataByAPI(paramProvince, paramZone);
-        getNumberOfVoterPerZone(paramProvince, paramZone)
-    }, [paramZone])
-    return <ProvinceAreaCompare />;
 
     function getNumberOfVoterPerProvince(province_name) {
         const data = getProvinceData(province_name);
@@ -84,6 +69,22 @@ const ProvincialLeft = () => {
         const zoneData = CountryTopoJson.objects['election-2562'].geometries.find(data => data.properties.province_name === province_name && data.properties.zone_name === zone_name);
         return zoneData;
     }
+
+    useEffect(() => {
+        if (!paramProvince) return;
+        setProvince(paramProvince);
+        getProvinceDataByAPI(paramProvince);
+        getNumberOfVoterPerProvince(paramProvince);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [paramProvince]);
+
+    useEffect(() => {
+        if (!paramZone) return;
+        setZone(paramZone);
+        getZoneDataByAPI(paramProvince, paramZone);
+        getNumberOfVoterPerZone(paramProvince, paramZone)
+    }, [paramZone])
+    return <ProvinceAreaCompare />;
 };
 
 const ToggleButton = styled.a`
@@ -110,7 +111,6 @@ const ToggleButton = styled.a`
 const ProvincialRight = ({ toggleShowDetail, partyChanged }) => {
     const { province, electionYear, CountryTopoJson } = useContext(MapContext);
     const [provincialProps, setProvincialProps] = useState([]);
-    const [partyView] = useState(true);
     const numDistricts = provincialProps.length;
 
     useEffect(() => {

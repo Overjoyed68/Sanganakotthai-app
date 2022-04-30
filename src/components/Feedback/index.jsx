@@ -72,7 +72,7 @@ const Feedback = () => {
                         <label>Feedback ประชาชน</label>
                     </div>
 
-                    {feedbakDataList.map(({ name, feedback, other, createdAt }, index) =>
+                    {feedbakDataList.map(({ name, feedback, other, createdAt, tel, province, electorate, contacted, resolved }, index) =>
                         <div className='feedback-box' key={index}>
                             <div className='feedback-date'>
                                 {createdAt}
@@ -87,15 +87,17 @@ const Feedback = () => {
                                 </textarea>
                                 <div className='feedback-answer-label-wrapper'>
                                     <span>
-                                        <label>{name}</label>
+                                        <label> {name} </label> | 
+                                        <label> เบอร์ติดต่อ {tel} </label> |
+                                        <label> {province} {electorate} </label> 
                                     </span>
 
-                                    <div className='feedback-answer-tag tag-blue'>
-                                        ติดต่อแล้ว
+                                    <div className={`feedback-answer-tag tag-${contacted ? "blue" : "disabled"}`}>
+                                        { contacted? 'ติดตามแล้ว' : 'ยังไม่ได้ติดตาม' }
                                     </div>
 
-                                    <div className='feedback-answer-tag tag-green'>
-                                        แก้ปัญหาแล้ว
+                                    <div className={`feedback-answer-tag tag-${resolved ? "green" : "disabled"}`}>
+                                        { resolved? 'แก้ปัญหาแล้ว' : 'ยังไม่ได้แก้ปัญหา' }
                                     </div>
                                 </div>
                             </div>
